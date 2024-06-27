@@ -1,6 +1,6 @@
 ﻿namespace Partify.Domain.Enums;
 
-public enum AppartmentStatuses
+public enum PostStatus
 {
 	New,
 	Sold,

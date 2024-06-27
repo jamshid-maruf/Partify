@@ -1,13 +1,13 @@
 ﻿using Partify.Domain.Commons;
 using Partify.Domain.Entities.Users;
 
-namespace Partify.Domain.Entities.Appartments;
+namespace Partify.Domain.Entities.Ads;
 
-public class AppartmentScore : Auditable
+public class AdScore : Auditable
 {
 	public int Score { get; set; }
 	public long UserId { get; set; }
 	public User User { get; set; }
-	public long AppartmentId { get; set; }
-	public Appartment Appartment { get; set; }
+	public long AdId { get; set; }
+	public Ad Ad { get; set; }
 }

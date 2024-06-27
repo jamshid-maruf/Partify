@@ -11,15 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Merchants\" />
-    <Folder Include="Services\Facilities\" />
-    <Folder Include="Services\Appartments\" />
-    <Folder Include="Services\AppartmentComments\" />
-    <Folder Include="Services\AppartmentCommentFiles\" />
-    <Folder Include="Services\AppartmentImages\" />
-    <Folder Include="Services\AppartmentScores\" />
-    <Folder Include="Services\AppartmentViews\" />
-    <Folder Include="Services\FavoriteAppartments\" />
+    <Folder Include="Services\AdComments\" />
+    <Folder Include="Services\AdCommentFiles\" />
+    <Folder Include="Services\AdImages\" />
+    <Folder Include="Services\AdScores\" />
+    <Folder Include="Services\AdViews\" />
+    <Folder Include="Services\FavoriteAds\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Partify.DataAccess.DbContexts;
 using Partify.DataAccess.Repositories;
-using Partify.Domain.Entities.Appartments;
+using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Commons;
 using Partify.Domain.Entities.Facilities;
 using Partify.Domain.Entities.Users;
@@ -17,28 +17,28 @@ public class UnitOfWork : IUnitOfWork
 		AssetRepository = new Repository<Asset>(context);
 		MerchantRepository = new Repository<Merchant>(context);
 		FacilityRepository = new Repository<Facility>(context);
-		AppartmentRepository = new Repository<Appartment>(context);
-		AppartmentViewRepository = new Repository<AppartmentView>(context);
-		AppartmentImageRepository = new Repository<AppartmentImage>(context);
-		AppartmentScoreRepository = new Repository<AppartmentScore>(context);
-		AppartmentCommentRepository = new Repository<AppartmentComment>(context);
-		AppartmentFacilityRepository = new Repository<AppartmentFacility>(context);
-		FavoriteAppartmentRepository = new Repository<FavoriteAppartment>(context);
-		AppartmentCommentFileRepository = new Repository<AppartmentCommentFile>(context);
+		AdRepository = new Repository<Ad>(context);
+		AdViewRepository = new Repository<AdView>(context);
+		AdImageRepository = new Repository<AdImage>(context);
+		AdScoreRepository = new Repository<AdScore>(context);
+		AdCommentRepository = new Repository<AdComment>(context);
+		AdFacilityRepository = new Repository<AdFacility>(context);
+		FavoriteAdRepository = new Repository<FavoriteAd>(context);
+		AdCommentFileRepository = new Repository<AdCommentFile>(context);
 	}
 
 	public IRepository<User> UserRepository { get; }
 	public IRepository<Asset> AssetRepository { get; }
 	public IRepository<Merchant> MerchantRepository { get; }
 	public IRepository<Facility> FacilityRepository { get; }
-	public IRepository<Appartment> AppartmentRepository { get; }
-	public IRepository<AppartmentView> AppartmentViewRepository { get; }
-	public IRepository<AppartmentImage> AppartmentImageRepository { get; }
-	public IRepository<AppartmentScore> AppartmentScoreRepository { get; }
-	public IRepository<AppartmentComment> AppartmentCommentRepository { get; }
-	public IRepository<AppartmentFacility> AppartmentFacilityRepository { get; }
-	public IRepository<FavoriteAppartment> FavoriteAppartmentRepository { get; }
-	public IRepository<AppartmentCommentFile> AppartmentCommentFileRepository { get; }
+	public IRepository<Ad> AdRepository { get; }
+	public IRepository<AdView> AdViewRepository { get; }
+	public IRepository<AdImage> AdImageRepository { get; }
+	public IRepository<AdScore> AdScoreRepository { get; }
+	public IRepository<AdComment> AdCommentRepository { get; }
+	public IRepository<AdFacility> AdFacilityRepository { get; }
+	public IRepository<FavoriteAd> FavoriteAdRepository { get; }
+	public IRepository<AdCommentFile> AdCommentFileRepository { get; }
 
 	public async ValueTask BeginTransactionAsync()
 	{

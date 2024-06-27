@@ -4,6 +4,7 @@ using Partify.DataAccess.UnitOfWorks;
 using Partify.Domain.Entities.Users;
 using Partify.Service.Exceptions;
 using Partify.Service.Helpers;
+
 namespace Partify.Service.Services.Accounts;
 
 public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : IAccountService
@@ -53,6 +54,10 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 
 		var createdUser = await unitOfWork.UserRepository.InsertAsync(user);
 		await unitOfWork.SaveAsync();
+
+		await unitOfWork.MerchantRepository.InsertAsync(new Merchant { UserId = createdUser.Id });
+		await unitOfWork.SaveAsync();
+
 		return createdUser;
 	}
 

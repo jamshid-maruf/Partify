@@ -1,5 +1,5 @@
 ﻿using Partify.DataAccess.Repositories;
-using Partify.Domain.Entities.Appartments;
+using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Commons;
 using Partify.Domain.Entities.Facilities;
 using Partify.Domain.Entities.Users;
@@ -8,18 +8,21 @@ namespace Partify.DataAccess.UnitOfWorks;
 
 public interface IUnitOfWork : IDisposable
 {
+	IRepository<Ad> AdRepository { get; }
 	IRepository<User> UserRepository { get; }
 	IRepository<Asset> AssetRepository { get; }
+	IRepository<AdView> AdViewRepository { get; }
+	IRepository<AdImage> AdImageRepository { get; }
+	IRepository<AdScore> AdScoreRepository { get; }
 	IRepository<Merchant> MerchantRepository { get; }
 	IRepository<Facility> FacilityRepository { get; }
-	IRepository<Appartment> AppartmentRepository { get; }
-	IRepository<AppartmentView> AppartmentViewRepository { get; }
-	IRepository<AppartmentImage> AppartmentImageRepository { get; }
-	IRepository<AppartmentScore> AppartmentScoreRepository { get; }
-	IRepository<AppartmentComment> AppartmentCommentRepository { get; }
-	IRepository<AppartmentFacility> AppartmentFacilityRepository { get; }
-	IRepository<FavoriteAppartment> FavoriteAppartmentRepository { get; }
-	IRepository<AppartmentCommentFile> AppartmentCommentFileRepository { get; }
+	IRepository<AdComment> AdCommentRepository { get; }
+	IRepository<AdFacility> AdFacilityRepository { get; }
+	IRepository<FavoriteAd> FavoriteAdRepository { get; }
+	IRepository<AdCategory> AdCategoryRepository { get; }
+	IRepository<AdCommentFile> AdCommentFileRepository { get; }
+	IRepository<AdPropertyValue> AdPropertyValueRepository { get; }
+	IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; }
 
 	ValueTask<bool> SaveAsync();
 	ValueTask BeginTransactionAsync();

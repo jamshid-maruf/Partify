@@ -25,7 +25,7 @@ namespace Partify.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.Appartment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.Ad", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,10 +94,10 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasIndex("MerchantId");
 
-                    b.ToTable("Appartments");
+                    b.ToTable("Ads");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentComment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdComment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,7 +105,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Comment")
@@ -137,14 +137,14 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AppartmentComments");
+                    b.ToTable("AdComments");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentCommentFile", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdCommentFile", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,7 +152,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentCommentId")
+                    b.Property<long>("AdCommentId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -181,14 +181,14 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentCommentId");
+                    b.HasIndex("AdCommentId");
 
                     b.HasIndex("FileId");
 
-                    b.ToTable("AppartmentCommentFiles");
+                    b.ToTable("AdCommentFiles");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentFacility", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdFacility", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,7 +196,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -225,14 +225,14 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("FacilityId");
 
-                    b.ToTable("AppartmentFacilities");
+                    b.ToTable("AdFacilities");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentImage", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdImage", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,7 +240,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -269,14 +269,14 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("AppartmentImages");
+                    b.ToTable("AdImages");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentScore", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdScore", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +284,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -316,14 +316,14 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AppartmentScores");
+                    b.ToTable("AdScores");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentView", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdView", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -331,7 +331,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -360,12 +360,12 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
-                    b.ToTable("AppartmentViews");
+                    b.ToTable("AdViews");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.FavoriteAppartment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.FavoriteAd", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -373,7 +373,7 @@ namespace Partify.DataAccess.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AppartmentId")
+                    b.Property<long>("AdId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -402,11 +402,11 @@ namespace Partify.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppartmentId");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteAppartments");
+                    b.ToTable("FavoriteAds");
                 });
 
             modelBuilder.Entity("Partify.Domain.Entities.Commons.Asset", b =>
@@ -577,7 +577,7 @@ namespace Partify.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.Appartment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.Ad", b =>
                 {
                     b.HasOne("Partify.Domain.Entities.Users.Merchant", "Merchant")
                         .WithMany()
@@ -588,11 +588,11 @@ namespace Partify.DataAccess.Migrations
                     b.Navigation("Merchant");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentComment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdComment", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany("Comments")
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -602,16 +602,16 @@ namespace Partify.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentCommentFile", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdCommentFile", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.AppartmentComment", "AppartmentComment")
+                    b.HasOne("Partify.Domain.Entities.Ads.AdComment", "AdComment")
                         .WithMany("Files")
-                        .HasForeignKey("AppartmentCommentId")
+                        .HasForeignKey("AdCommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -619,16 +619,16 @@ namespace Partify.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("FileId");
 
-                    b.Navigation("AppartmentComment");
+                    b.Navigation("AdComment");
 
                     b.Navigation("File");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentFacility", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdFacility", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany("Facilities")
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -638,16 +638,16 @@ namespace Partify.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
 
                     b.Navigation("Facility");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentImage", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdImage", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany("Images")
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -657,16 +657,16 @@ namespace Partify.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
 
                     b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentScore", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdScore", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany("Scores")
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -676,27 +676,27 @@ namespace Partify.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentView", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdView", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany()
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.FavoriteAppartment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.FavoriteAd", b =>
                 {
-                    b.HasOne("Partify.Domain.Entities.Appartments.Appartment", "Appartment")
+                    b.HasOne("Partify.Domain.Entities.Ads.Ad", "Ad")
                         .WithMany()
-                        .HasForeignKey("AppartmentId")
+                        .HasForeignKey("AdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -706,7 +706,7 @@ namespace Partify.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Appartment");
+                    b.Navigation("Ad");
 
                     b.Navigation("User");
                 });
@@ -722,7 +722,7 @@ namespace Partify.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.Appartment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.Ad", b =>
                 {
                     b.Navigation("Comments");
 
@@ -733,7 +733,7 @@ namespace Partify.DataAccess.Migrations
                     b.Navigation("Scores");
                 });
 
-            modelBuilder.Entity("Partify.Domain.Entities.Appartments.AppartmentComment", b =>
+            modelBuilder.Entity("Partify.Domain.Entities.Ads.AdComment", b =>
                 {
                     b.Navigation("Files");
                 });

@@ -104,7 +104,7 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "Appartments",
+				name: "Ads",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
@@ -131,9 +131,9 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_Appartments", x => x.Id);
+					table.PrimaryKey("PK_Ads", x => x.Id);
 					table.ForeignKey(
-						name: "FK_Appartments_Merchants_MerchantId",
+						name: "FK_Ads_Merchants_MerchantId",
 						column: x => x.MerchantId,
 						principalTable: "Merchants",
 						principalColumn: "Id",
@@ -141,13 +141,13 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentComments",
+				name: "AdComments",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
 					UserId = table.Column<long>(type: "bigint", nullable: false),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					Comment = table.Column<string>(type: "text", nullable: true),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -159,15 +159,15 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentComments", x => x.Id);
+					table.PrimaryKey("PK_AdComments", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentComments_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_AdComments_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_AppartmentComments_Users_UserId",
+						name: "FK_AdComments_Users_UserId",
 						column: x => x.UserId,
 						principalTable: "Users",
 						principalColumn: "Id",
@@ -175,12 +175,12 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentFacilities",
+				name: "AdFacilities",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					FacilityId = table.Column<long>(type: "bigint", nullable: false),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -192,15 +192,15 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentFacilities", x => x.Id);
+					table.PrimaryKey("PK_AdFacilities", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentFacilities_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_AdFacilities_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_AppartmentFacilities_Facilities_FacilityId",
+						name: "FK_AdFacilities_Facilities_FacilityId",
 						column: x => x.FacilityId,
 						principalTable: "Facilities",
 						principalColumn: "Id",
@@ -208,12 +208,12 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentImages",
+				name: "AdImages",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					ImageId = table.Column<long>(type: "bigint", nullable: false),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -225,15 +225,15 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentImages", x => x.Id);
+					table.PrimaryKey("PK_AdImages", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentImages_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_AdImages_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_AppartmentImages_Assets_ImageId",
+						name: "FK_AdImages_Assets_ImageId",
 						column: x => x.ImageId,
 						principalTable: "Assets",
 						principalColumn: "Id",
@@ -241,14 +241,14 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentScores",
+				name: "AdScores",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
 					Score = table.Column<int>(type: "integer", nullable: false),
 					UserId = table.Column<long>(type: "bigint", nullable: false),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
 					IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -259,15 +259,15 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentScores", x => x.Id);
+					table.PrimaryKey("PK_AdScores", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentScores_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_AdScores_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_AppartmentScores_Users_UserId",
+						name: "FK_AdScores_Users_UserId",
 						column: x => x.UserId,
 						principalTable: "Users",
 						principalColumn: "Id",
@@ -275,13 +275,13 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentViews",
+				name: "AdViews",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
 					ViewCount = table.Column<int>(type: "integer", nullable: false),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
 					IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -292,23 +292,23 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentViews", x => x.Id);
+					table.PrimaryKey("PK_AdViews", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentViews_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_AdViews_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 				});
 
 			migrationBuilder.CreateTable(
-				name: "FavoriteAppartments",
+				name: "FavoriteAds",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
 					UserId = table.Column<long>(type: "bigint", nullable: false),
-					AppartmentId = table.Column<long>(type: "bigint", nullable: false),
+					AdId = table.Column<long>(type: "bigint", nullable: false),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
 					IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
@@ -319,15 +319,15 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_FavoriteAppartments", x => x.Id);
+					table.PrimaryKey("PK_FavoriteAds", x => x.Id);
 					table.ForeignKey(
-						name: "FK_FavoriteAppartments_Appartments_AppartmentId",
-						column: x => x.AppartmentId,
-						principalTable: "Appartments",
+						name: "FK_FavoriteAds_Ads_AdId",
+						column: x => x.AdId,
+						principalTable: "Ads",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_FavoriteAppartments_Users_UserId",
+						name: "FK_FavoriteAds_Users_UserId",
 						column: x => x.UserId,
 						principalTable: "Users",
 						principalColumn: "Id",
@@ -335,12 +335,12 @@ namespace Partify.DataAccess.Migrations
 				});
 
 			migrationBuilder.CreateTable(
-				name: "AppartmentCommentFiles",
+				name: "AdCommentFiles",
 				columns: table => new
 				{
 					Id = table.Column<long>(type: "bigint", nullable: false)
 						.Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-					AppartmentCommentId = table.Column<long>(type: "bigint", nullable: false),
+					AdCommentId = table.Column<long>(type: "bigint", nullable: false),
 					FileId = table.Column<long>(type: "bigint", nullable: true),
 					CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
 					UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -352,88 +352,88 @@ namespace Partify.DataAccess.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_AppartmentCommentFiles", x => x.Id);
+					table.PrimaryKey("PK_AdCommentFiles", x => x.Id);
 					table.ForeignKey(
-						name: "FK_AppartmentCommentFiles_AppartmentComments_AppartmentComment~",
-						column: x => x.AppartmentCommentId,
-						principalTable: "AppartmentComments",
+						name: "FK_AdCommentFiles_AdComments_AdComment~",
+						column: x => x.AdCommentId,
+						principalTable: "AdComments",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 					table.ForeignKey(
-						name: "FK_AppartmentCommentFiles_Assets_FileId",
+						name: "FK_AdCommentFiles_Assets_FileId",
 						column: x => x.FileId,
 						principalTable: "Assets",
 						principalColumn: "Id");
 				});
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentCommentFiles_AppartmentCommentId",
-				table: "AppartmentCommentFiles",
-				column: "AppartmentCommentId");
+				name: "IX_AdCommentFiles_AdCommentId",
+				table: "AdCommentFiles",
+				column: "AdCommentId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentCommentFiles_FileId",
-				table: "AppartmentCommentFiles",
+				name: "IX_AdCommentFiles_FileId",
+				table: "AdCommentFiles",
 				column: "FileId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentComments_AppartmentId",
-				table: "AppartmentComments",
-				column: "AppartmentId");
+				name: "IX_AdComments_AdId",
+				table: "AdComments",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentComments_UserId",
-				table: "AppartmentComments",
+				name: "IX_AdComments_UserId",
+				table: "AdComments",
 				column: "UserId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentFacilities_AppartmentId",
-				table: "AppartmentFacilities",
-				column: "AppartmentId");
+				name: "IX_AdFacilities_AdId",
+				table: "AdFacilities",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentFacilities_FacilityId",
-				table: "AppartmentFacilities",
+				name: "IX_AdFacilities_FacilityId",
+				table: "AdFacilities",
 				column: "FacilityId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentImages_AppartmentId",
-				table: "AppartmentImages",
-				column: "AppartmentId");
+				name: "IX_AdImages_AdId",
+				table: "AdImages",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentImages_ImageId",
-				table: "AppartmentImages",
+				name: "IX_AdImages_ImageId",
+				table: "AdImages",
 				column: "ImageId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_Appartments_MerchantId",
-				table: "Appartments",
+				name: "IX_Ads_MerchantId",
+				table: "Ads",
 				column: "MerchantId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentScores_AppartmentId",
-				table: "AppartmentScores",
-				column: "AppartmentId");
+				name: "IX_AdScores_AdId",
+				table: "AdScores",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentScores_UserId",
-				table: "AppartmentScores",
+				name: "IX_AdScores_UserId",
+				table: "AdScores",
 				column: "UserId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_AppartmentViews_AppartmentId",
-				table: "AppartmentViews",
-				column: "AppartmentId");
+				name: "IX_AdViews_AdId",
+				table: "AdViews",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_FavoriteAppartments_AppartmentId",
-				table: "FavoriteAppartments",
-				column: "AppartmentId");
+				name: "IX_FavoriteAds_AdId",
+				table: "FavoriteAds",
+				column: "AdId");
 
 			migrationBuilder.CreateIndex(
-				name: "IX_FavoriteAppartments_UserId",
-				table: "FavoriteAppartments",
+				name: "IX_FavoriteAds_UserId",
+				table: "FavoriteAds",
 				column: "UserId");
 
 			migrationBuilder.CreateIndex(
@@ -446,25 +446,25 @@ namespace Partify.DataAccess.Migrations
 		protected override void Down(MigrationBuilder migrationBuilder)
 		{
 			migrationBuilder.DropTable(
-				name: "AppartmentCommentFiles");
+				name: "AdCommentFiles");
 
 			migrationBuilder.DropTable(
-				name: "AppartmentFacilities");
+				name: "AdFacilities");
 
 			migrationBuilder.DropTable(
-				name: "AppartmentImages");
+				name: "AdImages");
 
 			migrationBuilder.DropTable(
-				name: "AppartmentScores");
+				name: "AdScores");
 
 			migrationBuilder.DropTable(
-				name: "AppartmentViews");
+				name: "AdViews");
 
 			migrationBuilder.DropTable(
-				name: "FavoriteAppartments");
+				name: "FavoriteAds");
 
 			migrationBuilder.DropTable(
-				name: "AppartmentComments");
+				name: "AdComments");
 
 			migrationBuilder.DropTable(
 				name: "Facilities");
@@ -473,7 +473,7 @@ namespace Partify.DataAccess.Migrations
 				name: "Assets");
 
 			migrationBuilder.DropTable(
-				name: "Appartments");
+				name: "Ads");
 
 			migrationBuilder.DropTable(
 				name: "Merchants");
