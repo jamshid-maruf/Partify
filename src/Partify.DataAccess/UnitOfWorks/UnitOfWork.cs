@@ -40,7 +40,13 @@ public class UnitOfWork : IUnitOfWork
 	public IRepository<FavoriteAd> FavoriteAdRepository { get; }
 	public IRepository<AdCommentFile> AdCommentFileRepository { get; }
 
-	public async ValueTask BeginTransactionAsync()
+    public IRepository<AdCategory> AdCategoryRepository { get; }
+
+    public IRepository<AdPropertyValue> AdPropertyValueRepository { get; }
+
+    public IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; }
+
+    public async ValueTask BeginTransactionAsync()
 	{
 		await context.Database.BeginTransactionAsync();
 	}
