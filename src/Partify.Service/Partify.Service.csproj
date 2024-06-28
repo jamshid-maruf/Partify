@@ -15,7 +15,6 @@
     <Folder Include="Services\AdCommentFiles\" />
     <Folder Include="Services\AdImages\" />
     <Folder Include="Services\AdScores\" />
-    <Folder Include="Services\AdViews\" />
   </ItemGroup>
 
   <ItemGroup>
