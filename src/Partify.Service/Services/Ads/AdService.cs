@@ -4,10 +4,11 @@ using Partify.Domain.Entities.Ads;
 using Partify.Service.Configurations;
 using Partify.Service.Exceptions;
 using Partify.Service.Extensions;
+using Partify.Service.Services.AdViews;
 
 namespace Partify.Service.Services.Ads;
 
-public class AdService(IUnitOfWork unitOfWork) : IAdService
+public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : IAdService
 {
 	public async ValueTask<Ad> CreateAsync(Ad ad)
 	{
@@ -62,7 +63,9 @@ public class AdService(IUnitOfWork unitOfWork) : IAdService
 		var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == id)
 			?? throw new NotFoundException($"Ad is not found with this ID={id}");
 
-		return existAd;
+        await adViewService.IncrementViewCountAsync(existAd.Id);
+
+        return existAd;
 	}
 
 	public async ValueTask<IEnumerable<Ad>> GetAllAsync(PaginationParams @params, Filter filter, string search = null, long? categoryId = null)
