@@ -8,4 +8,5 @@ public static class EnvironmentHelper
 	public static string SmtpPort { get; set; }
 	public static string EmailAddress { get; set; }
 	public static string EmailPassword { get; set; }
+	public static string WebRootPath { get; set; }
 }

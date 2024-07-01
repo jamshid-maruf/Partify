@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Partify.Service\Partify.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

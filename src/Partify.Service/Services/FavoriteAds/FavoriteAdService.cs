@@ -48,5 +48,4 @@ public class FavoriteAdService(IUnitOfWork unitOfWork) : IFavoriteAdService
 
         return await pagedFavorite.ToListAsync();
     }
-
 }

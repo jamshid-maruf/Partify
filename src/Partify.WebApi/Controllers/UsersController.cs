@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Service.Configurations;
 using Partify.WebApi.ApiServices.Users;
 using Partify.WebApi.Models.Commons;
@@ -6,6 +7,7 @@ using Partify.WebApi.Models.Users;
 
 namespace Partify.WebApi.Controllers;
 
+[Authorize(Roles = "User")]
 public class UsersController(IUserApiService userApiService) : BaseController
 {
 	[HttpPut("{id:long}")]
@@ -54,7 +56,6 @@ public class UsersController(IUserApiService userApiService) : BaseController
 			Data = await userApiService.GetAllAsync(@params, filter, search)
 		});
 	}
-
 
 	[HttpPatch("change-password")]
 	public async ValueTask<IActionResult> PatchAsync(string oldPassword, string newPassword, string confirmPassword)

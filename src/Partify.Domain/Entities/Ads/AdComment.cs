@@ -5,6 +5,7 @@ namespace Partify.Domain.Entities.Ads;
 
 public class AdComment : Auditable
 {
+	public long? ParentId { get; set; }
 	public long UserId { get; set; }
 	public User User { get; set; }
 	public long AdId { get; set; }

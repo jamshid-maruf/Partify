@@ -23,7 +23,7 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
 	{
 		entity.IsDeleted = true;
 		entity.DeletedAt = DateTime.UtcNow;
-		context.Set<TEntity>().Remove(entity);
+		context.Set<TEntity>().Update(entity);
 		await Task.CompletedTask;
 	}
 

@@ -4,9 +4,9 @@ using Partify.Domain.Entities.Users;
 
 namespace Partify.DataAccess.EntityConfigurations;
 
-public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
+public class UserRolePermissionEntityTypeConfiguration : IEntityTypeConfiguration<UserRolePermission>
 {
-	public void Configure(EntityTypeBuilder<User> builder)
+	public void Configure(EntityTypeBuilder<UserRolePermission> builder)
 	{
 	}
 }
