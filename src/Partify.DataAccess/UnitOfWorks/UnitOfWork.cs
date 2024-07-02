@@ -15,7 +15,7 @@ public class UnitOfWork : IUnitOfWork
 		this.context = context;
 		AdRepository = new Repository<Ad>(context);
 		UserRepository = new Repository<User>(context);
-		AssetRepository = new Repository<Asset>(context);
+		AssetRepository = new Repository<AssetViewModel>(context);
 		AdViewRepository = new Repository<AdView>(context);
 		AdImageRepository = new Repository<AdImage>(context);
 		AdScoreRepository = new Repository<AdScore>(context);
@@ -32,7 +32,7 @@ public class UnitOfWork : IUnitOfWork
 
 	public IRepository<Ad> AdRepository { get; }
 	public IRepository<User> UserRepository { get; }
-	public IRepository<Asset> AssetRepository { get; }
+	public IRepository<AssetViewModel> AssetRepository { get; }
 	public IRepository<AdView> AdViewRepository { get; }
 	public IRepository<AdImage> AdImageRepository { get; }
 	public IRepository<AdScore> AdScoreRepository { get; }

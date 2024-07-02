@@ -2,7 +2,7 @@
 
 namespace Partify.Domain.Entities.Commons;
 
-public class Asset : Auditable
+public class AssetViewModel : Auditable
 {
 	public string FileName { get; set; }
 	public string FilePath { get; set; }

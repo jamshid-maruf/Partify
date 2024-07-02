@@ -8,7 +8,7 @@ namespace Partify.Service.Services.Assets;
 
 public class AssetService(IUnitOfWork unitOfWork) : IAssetService
 {
-	public async ValueTask<Asset> UploadAsync(IFormFile file, string fileType)
+	public async ValueTask<AssetViewModel> UploadAsync(IFormFile file, string fileType)
 	{
 		var directoryPath = Path.Combine(EnvironmentHelper.WebRootPath, fileType);
 		if (!Directory.Exists(directoryPath))
@@ -22,7 +22,7 @@ public class AssetService(IUnitOfWork unitOfWork) : IAssetService
 		var bytes = memoryStream.ToArray();
 		await fileStream.WriteAsync(bytes);
 
-		var asset = new Asset
+		var asset = new AssetViewModel
 		{
 			FilePath = fullPath,
 			FileName = file.FileName,
@@ -45,7 +45,7 @@ public class AssetService(IUnitOfWork unitOfWork) : IAssetService
 		return true;
 	}
 
-	public async ValueTask<Asset> GetByIdAsync(long id)
+	public async ValueTask<AssetViewModel> GetByIdAsync(long id)
 	{
 		var existFile = await unitOfWork.AssetRepository.SelectAsync(file => file.Id == id)
 			?? throw new NotFoundException($"File is not found with this ID={id}");
