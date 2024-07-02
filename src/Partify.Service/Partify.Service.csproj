@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Partify.DataAccess\Partify.DataAccess.csproj" />
+    <ProjectReference Include="..\Partify.Domain\Partify.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
