@@ -5,7 +5,9 @@ using Partify.WebApi.Models.Users;
 
 namespace Partify.WebApi.Controllers;
 
-public class AccountsController(IAccountApiService accountApiService) : BaseController
+[Route("api/[controller]")]
+[ApiController]
+public class AccountsController(IAccountApiService accountApiService) : ControllerBase
 {
 	[HttpPost("register")]
 	public async ValueTask<IActionResult> RegisterAsync(UserRegisterModel registerModel)

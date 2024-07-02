@@ -7,7 +7,6 @@ using Partify.WebApi.Models.Users;
 
 namespace Partify.WebApi.Controllers;
 
-[Authorize(Roles = "User")]
 public class UsersController(IUserApiService userApiService) : BaseController
 {
 	[HttpPut("{id:long}")]

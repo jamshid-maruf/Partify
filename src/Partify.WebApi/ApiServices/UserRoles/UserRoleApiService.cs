@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Partify.Domain.Entities.Users;
+using Partify.Service.Configurations;
 using Partify.Service.Services.UserRoles;
 using Partify.WebApi.Models.UserRoles;
 
@@ -21,17 +22,21 @@ public class UserRoleApiService(IUserRoleService userRoleService, IMapper mapper
 
     public async ValueTask<bool> DeleteAsync(long id)
     {
-        var deletedUserRole = await userRoleService.DeleteAsync(id);
-        return true;
+        return await userRoleService.DeleteAsync(id);
     }
 
-    public ValueTask<IEnumerable<UserRoleViewModel>> GetAllAsync()
+    public async ValueTask<IEnumerable<UserRoleViewModel>> GetAllAsync(
+        PaginationParams @params,
+        Filter filter,
+        string search = null)
     {
-        throw new NotImplementedException();
+        var result = await userRoleService.GetAllAsync(@params, filter, search);
+        return mapper.Map<IEnumerable<UserRoleViewModel>>(result);
     }
 
-    public ValueTask<UserRoleViewModel> GetByIdAsync(long id)
+    public async ValueTask<UserRoleViewModel> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+        var result = await userRoleService.GetByIdAsync(id);
+        return mapper.Map<UserRoleViewModel>(result);
     }
 }

@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Partify.DataAccess.DbContexts;
 using Partify.Service.Helpers;
+using Partify.Service.Services.UserRolePermissions;
+using Partify.Service.Services.UserRoles;
 using Partify.WebApi.Extensions;
+using Partify.WebApi.Helpers;
 using Partify.WebApi.MapperConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +35,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
+
+ServiceHelper.InitializeServices(app.Services);
 
 HttpContextHelper.ContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 EnvironmentHelper.JwtKey = app.Configuration.GetSection("Jwt:Key").Value;

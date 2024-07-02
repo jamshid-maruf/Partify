@@ -9,5 +9,8 @@ public interface IUserRoleApiService
     ValueTask<UserRoleViewModel> UpdateAsync(long id, UserRoleUpdateModel updateModel);
     ValueTask<bool> DeleteAsync(long id);
     ValueTask<UserRoleViewModel> GetByIdAsync(long id);
-    ValueTask<IEnumerable<UserRoleViewModel>> GetAllAsync();
+    ValueTask<IEnumerable<UserRoleViewModel>> GetAllAsync(
+		PaginationParams @params,
+		Filter filter,
+		string search = null);
 }

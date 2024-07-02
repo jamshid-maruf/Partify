@@ -65,4 +65,13 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 
 		return existUserRole;
     }
+
+	public async ValueTask<UserRole> GetByNameAsync(string name)
+	{
+		var existUserRole = await unitOfWork.UserRoleRepository
+			.SelectAsync(role => role.Name.ToLower() == name.ToLower())
+		   ?? throw new NotFoundException($"This user role is not found with this name={name}");
+
+		return existUserRole;
+	}
 }
