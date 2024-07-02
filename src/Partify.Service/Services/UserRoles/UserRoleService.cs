@@ -1,32 +1,68 @@
-﻿using Partify.Domain.Entities.Users;
+﻿using Microsoft.EntityFrameworkCore;
+using Partify.DataAccess.UnitOfWorks;
+using Partify.Domain.Entities.Users;
 using Partify.Service.Configurations;
+using Partify.Service.Exceptions;
+using Partify.Service.Extensions;
+using Partify.Service.Helpers;
 
 namespace Partify.Service.Services.UserRoles;
 
-public class UserRoleService() : IUserRoleService
+public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 {
-	public ValueTask<UserRole> CreateAsync(UserRole userRole)
+	public async ValueTask<UserRole> CreateAsync(UserRole userRole)
 	{
-		throw new NotImplementedException();
+		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Name.ToLower() == userRole.Name.ToLower());
+
+		if (existUserRole != null)
+			throw new AlreadyExistException("UserRole is already exist");
+
+		userRole.CreatedById = HttpContextHelper.GetUserId;
+		var createdUserRole = await unitOfWork.UserRoleRepository.InsertAsync(userRole);
+		await unitOfWork.SaveAsync();
+
+		return createdUserRole;
 	}
 
-	public ValueTask<bool> DeleteAsync(long id)
-	{
-		throw new NotImplementedException();
-	}
+    public async ValueTask<UserRole> UpdateAsync(long id, UserRole userRole)
+    {
+        var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
+            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
 
-	public ValueTask<IEnumerable<UserRole>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
-	{
-		throw new NotImplementedException();
-	}
+		existUserRole.Name = userRole.Name;
+        await unitOfWork.UserRoleRepository.UpdateAsync(existUserRole);
+        await unitOfWork.SaveAsync();
 
-	public ValueTask<UserRole> GetByIdAsync(long id)
-	{
-		throw new NotImplementedException();
-	}
+		return existUserRole;
+    }
 
-	public ValueTask<UserRole> UpdateAsync(long id, UserRole userRole)
+    public async ValueTask<bool> DeleteAsync(long id)
 	{
-		throw new NotImplementedException();
-	}
+		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
+            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+
+		await unitOfWork.UserRoleRepository.DeleteAsync(existUserRole);
+		await unitOfWork.SaveAsync();
+
+		return true;
+    }
+
+    public async ValueTask<IEnumerable<UserRole>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
+	{
+		var userRoles = unitOfWork.UserRoleRepository.Select().OrderBy(filter);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            userRoles = userRoles.Where(userRole => userRole.Name.ToLower().Contains(search.ToLower()));
+
+        var pagedUserRoles = userRoles.ToPaginateAsQueryable(@params);
+        return await pagedUserRoles.ToListAsync();
+    }
+
+	public async ValueTask<UserRole> GetByIdAsync(long id)
+	{
+        var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
+            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+
+		return existUserRole;
+    }
 }
