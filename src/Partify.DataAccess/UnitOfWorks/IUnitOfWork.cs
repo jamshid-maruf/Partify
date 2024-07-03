@@ -10,7 +10,7 @@ public interface IUnitOfWork : IDisposable
 {
 	IRepository<Ad> AdRepository { get; }
 	IRepository<User> UserRepository { get; }
-	IRepository<Asset> AssetRepository { get; }
+	IRepository<AssetViewModel> AssetRepository { get; }
 	IRepository<AdView> AdViewRepository { get; }
 	IRepository<AdImage> AdImageRepository { get; }
 	IRepository<AdScore> AdScoreRepository { get; }
