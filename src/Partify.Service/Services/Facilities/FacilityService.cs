@@ -62,7 +62,7 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 	{
 		var facilities = unitOfWork.FacilityRepository.Select().OrderBy(filter);
 
-		if(!string.IsNullOrWhiteSpace(search))
+		if (!string.IsNullOrWhiteSpace(search))
 			facilities = facilities.Where(facility => facility.Name.ToLower().Contains(search.ToLower()));
 
 		var pagedFacilities = facilities.ToPaginateAsQueryable(@params);

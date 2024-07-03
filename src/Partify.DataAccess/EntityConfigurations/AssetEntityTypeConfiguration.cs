@@ -4,9 +4,9 @@ using Partify.Domain.Entities.Commons;
 
 namespace Partify.DataAccess.EntityConfigurations;
 
-public class AssetEntityTypeConfiguration : IEntityTypeConfiguration<AssetViewModel>
+public class AssetEntityTypeConfiguration : IEntityTypeConfiguration<Asset>
 {
-	public void Configure(EntityTypeBuilder<AssetViewModel> builder)
+	public void Configure(EntityTypeBuilder<Asset> builder)
 	{
 	}
 }

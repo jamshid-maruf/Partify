@@ -38,18 +38,18 @@ public class AdImageService(IUnitOfWork unitOfWork, IAssetService assetService) 
 
 		await unitOfWork.AdImageRepository.DeleteAsync(existAdImage);
 		await unitOfWork.SaveAsync();
-		return true;	
+		return true;
 	}
 
 	public async ValueTask<AdImage> GetAsync(long id)
 	{
 		var existAdImage = await unitOfWork.AdImageRepository
-			.SelectAsync(expression: image => image.Id == id, includes: [ "Image", "Ad" ])
+			.SelectAsync(expression: image => image.Id == id, includes: ["Image", "Ad"])
 			?? throw new NotFoundException($"Image is not found with this ID={id}");
 
 		return existAdImage;
 	}
-	
+
 	public async ValueTask<IEnumerable<AdImage>> GetAllByAdIdAsync(long adId, Filter filter)
 	{
 		var exsitAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == adId)

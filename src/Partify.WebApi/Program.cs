@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Partify.DataAccess.DbContexts;
 using Partify.Service.Helpers;
-using Partify.Service.Services.UserRolePermissions;
-using Partify.Service.Services.UserRoles;
 using Partify.WebApi.Extensions;
 using Partify.WebApi.Helpers;
 using Partify.WebApi.MapperConfigurations;

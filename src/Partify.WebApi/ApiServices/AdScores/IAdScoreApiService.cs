@@ -4,7 +4,7 @@ namespace Partify.WebApi.ApiServices.AdScores;
 
 public interface IAdScoreApiService
 {
-    ValueTask<AdScoreViewModel> AddOrUpdateScoreAsync(AdScoreCreateModel createModel);
-    ValueTask<bool> DeleteAsync(long id);
-    ValueTask<double> GetAverageScoreAsync(long adId);
+	ValueTask<AdScoreViewModel> AddOrUpdateScoreAsync(AdScoreCreateModel createModel);
+	ValueTask<bool> DeleteAsync(long id);
+	ValueTask<double> GetAverageScoreAsync(long adId);
 }

@@ -5,7 +5,7 @@ namespace Partify.Service.Services.Assets;
 
 public interface IAssetService
 {
-	ValueTask<AssetViewModel> UploadAsync(IFormFile file, string fileType);
+	ValueTask<Asset> UploadAsync(IFormFile file, string fileType);
 	ValueTask<bool> DeleteAsync(long id);
-	ValueTask<AssetViewModel> GetByIdAsync(long id);
+	ValueTask<Asset> GetByIdAsync(long id);
 }

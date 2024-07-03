@@ -4,7 +4,6 @@ namespace Partify.WebApi.Models.AddComments;
 
 public class AdCommentViewModel
 {
-	public long Id { get; set; }
 	public AdCommentViewModel Parent { get; set; }
 	public UserViewModel User { get; set; }
 	// TODO: public AdViewModel Ad { get; set; }

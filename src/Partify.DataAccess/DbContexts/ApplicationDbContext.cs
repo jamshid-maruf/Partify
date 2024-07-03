@@ -13,7 +13,7 @@ public class ApplicationDbContext : DbContext
 
 	public DbSet<Ad> Ads { get; set; }
 	public DbSet<User> Users { get; set; }
-	public DbSet<AssetViewModel> Assets { get; set; }
+	public DbSet<Asset> Assets { get; set; }
 	public DbSet<AdView> AdViews { get; set; }
 	public DbSet<AdImage> AdImages { get; set; }
 	public DbSet<AdScore> AdScores { get; set; }
@@ -53,7 +53,7 @@ public class ApplicationDbContext : DbContext
 
 		modelBuilder.Entity<Ad>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<User>().HasQueryFilter(entity => !entity.IsDeleted);
-		modelBuilder.Entity<AssetViewModel>().HasQueryFilter(entity => !entity.IsDeleted);
+		modelBuilder.Entity<Asset>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<AdView>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<AdImage>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<AdScore>().HasQueryFilter(entity => !entity.IsDeleted);

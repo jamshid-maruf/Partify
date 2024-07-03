@@ -3,7 +3,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Partify.DataAccess.UnitOfWorks;
 using Partify.Service.Services.Accounts;
-using Partify.Service.Services.AdCommentFiles;
 using Partify.Service.Services.AdComments;
 using Partify.Service.Services.AdImages;
 using Partify.Service.Services.Ads;

@@ -1,9 +1,7 @@
-﻿using Partify.Domain.Entities.Ads;
-
-namespace Partify.WebApi.Models.AdImages;
+﻿namespace Partify.WebApi.Models.AdImages;
 
 public class AdImageCreateModel
 {
-    public long AdId { get; set; }
-    public long ImageId { get; set; }
+	public long AdId { get; set; }
+	public long ImageId { get; set; }
 }

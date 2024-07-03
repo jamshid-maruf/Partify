@@ -24,47 +24,47 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 		return createdUserRole;
 	}
 
-    public async ValueTask<UserRole> UpdateAsync(long id, UserRole userRole)
-    {
-        var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
-
-		existUserRole.Name = userRole.Name;
-        await unitOfWork.UserRoleRepository.UpdateAsync(existUserRole);
-        await unitOfWork.SaveAsync();
-
-		return existUserRole;
-    }
-
-    public async ValueTask<bool> DeleteAsync(long id)
+	public async ValueTask<UserRole> UpdateAsync(long id, UserRole userRole)
 	{
 		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+			?? throw new NotFoundException($"This user role is not found with this ID={id}");
+
+		existUserRole.Name = userRole.Name;
+		await unitOfWork.UserRoleRepository.UpdateAsync(existUserRole);
+		await unitOfWork.SaveAsync();
+
+		return existUserRole;
+	}
+
+	public async ValueTask<bool> DeleteAsync(long id)
+	{
+		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
+			?? throw new NotFoundException($"This user role is not found with this ID={id}");
 
 		await unitOfWork.UserRoleRepository.DeleteAsync(existUserRole);
 		await unitOfWork.SaveAsync();
 
 		return true;
-    }
+	}
 
-    public async ValueTask<IEnumerable<UserRole>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
+	public async ValueTask<IEnumerable<UserRole>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
 	{
 		var userRoles = unitOfWork.UserRoleRepository.Select().OrderBy(filter);
 
-        if (!string.IsNullOrWhiteSpace(search))
-            userRoles = userRoles.Where(userRole => userRole.Name.ToLower().Contains(search.ToLower()));
+		if (!string.IsNullOrWhiteSpace(search))
+			userRoles = userRoles.Where(userRole => userRole.Name.ToLower().Contains(search.ToLower()));
 
-        var pagedUserRoles = userRoles.ToPaginateAsQueryable(@params);
-        return await pagedUserRoles.ToListAsync();
-    }
+		var pagedUserRoles = userRoles.ToPaginateAsQueryable(@params);
+		return await pagedUserRoles.ToListAsync();
+	}
 
 	public async ValueTask<UserRole> GetByIdAsync(long id)
 	{
-        var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
+			?? throw new NotFoundException($"This user role is not found with this ID={id}");
 
 		return existUserRole;
-    }
+	}
 
 	public async ValueTask<UserRole> GetByNameAsync(string name)
 	{

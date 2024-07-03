@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Users;
 using Partify.WebApi.Models.UserRoles;
 using Partify.WebApi.Models.Users;
@@ -16,14 +15,9 @@ public class MappingProfile : Profile
 		CreateMap<UserRegisterModel, User>();
 		CreateMap<User, LoginViewModel>();
 
-        CreateMap<UserRole, UserRoleCreateModel>().ReverseMap();
-        CreateMap<UserRole, UserRoleUpdateModel>().ReverseMap();
-        CreateMap<UserRole, UserRoleViewModel>().ReverseMap();
-        CreateMap<AdImage, AdImageCreateModel>().ReverseMap();
-        CreateMap<AdImage, AdImageViewModel>().ReverseMap();
-        CreateMap<FavoriteAd, FavoriteAdViewModel>().ReverseMap();
-        CreateMap<FavoriteAd, FavoriteAdCreateModel>().ReverseMap();
-        CreateMap<AdScore, AdScoreCreateModel>().ReverseMap();
-        CreateMap<AdScore, AdScoreViewModel>().ReverseMap();
-    }
+		CreateMap<UserRole, UserRoleCreateModel>().ReverseMap();
+		CreateMap<UserRole, UserRoleUpdateModel>().ReverseMap();
+		CreateMap<UserRole, UserRoleViewModel>().ReverseMap();
+
+	}
 }

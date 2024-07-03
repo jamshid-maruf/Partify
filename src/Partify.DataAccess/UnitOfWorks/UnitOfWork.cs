@@ -7,49 +7,29 @@ using Partify.Domain.Entities.Users;
 
 namespace Partify.DataAccess.UnitOfWorks;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 {
-	private readonly ApplicationDbContext context;
-	public UnitOfWork(ApplicationDbContext context)
-	{
-		this.context = context;
-		AdRepository = new Repository<Ad>(context);
-		UserRepository = new Repository<User>(context);
-		AssetRepository = new Repository<AssetViewModel>(context);
-		AdViewRepository = new Repository<AdView>(context);
-		AdImageRepository = new Repository<AdImage>(context);
-		AdScoreRepository = new Repository<AdScore>(context);
-		MerchantRepository = new Repository<Merchant>(context);
-		FacilityRepository = new Repository<Facility>(context);
-		UserRoleRepository = new Repository<UserRole>(context);
-		AdCommentRepository = new Repository<AdComment>(context);
-		AdFacilityRepository = new Repository<AdFacility>(context);
-		PermissionRepository = new Repository<Permission>(context);
-		FavoriteAdRepository = new Repository<FavoriteAd>(context);
-		AdCommentFileRepository = new Repository<AdCommentFile>(context);
-		UserRolePermissionRepository = new Repository<UserRolePermission>(context);
-	}
+	private readonly ApplicationDbContext context = context;
+	public IRepository<Ad> AdRepository { get; } = new Repository<Ad>(context);
+	public IRepository<User> UserRepository { get; } = new Repository<User>(context);
+	public IRepository<Asset> AssetRepository { get; } = new Repository<Asset>(context);
+	public IRepository<AdView> AdViewRepository { get; } = new Repository<AdView>(context);
+	public IRepository<AdImage> AdImageRepository { get; } = new Repository<AdImage>(context);
+	public IRepository<AdScore> AdScoreRepository { get; } = new Repository<AdScore>(context);
+	public IRepository<Merchant> MerchantRepository { get; } = new Repository<Merchant>(context);
+	public IRepository<Facility> FacilityRepository { get; } = new Repository<Facility>(context);
+	public IRepository<UserRole> UserRoleRepository { get; } = new Repository<UserRole>(context);
+	public IRepository<AdComment> AdCommentRepository { get; } = new Repository<AdComment>(context);
+	public IRepository<AdFacility> AdFacilityRepository { get; } = new Repository<AdFacility>(context);
+	public IRepository<FavoriteAd> FavoriteAdRepository { get; } = new Repository<FavoriteAd>(context);
+	public IRepository<AdCategory> AdCategoryRepository { get; } = new Repository<AdCategory>(context);
+	public IRepository<Permission> PermissionRepository { get; } = new Repository<Permission>(context);
+	public IRepository<AdCommentFile> AdCommentFileRepository { get; } = new Repository<AdCommentFile>(context);
+	public IRepository<AdPropertyValue> AdPropertyValueRepository { get; } = new Repository<AdPropertyValue>(context);
+	public IRepository<UserRolePermission> UserRolePermissionRepository { get; } = new Repository<UserRolePermission>(context);
+	public IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; } = new Repository<AdCategoryProperty>(context);
 
-	public IRepository<Ad> AdRepository { get; }
-	public IRepository<User> UserRepository { get; }
-	public IRepository<AssetViewModel> AssetRepository { get; }
-	public IRepository<AdView> AdViewRepository { get; }
-	public IRepository<AdImage> AdImageRepository { get; }
-	public IRepository<AdScore> AdScoreRepository { get; }
-	public IRepository<Merchant> MerchantRepository { get; }
-	public IRepository<Facility> FacilityRepository { get; }
-	public IRepository<UserRole> UserRoleRepository { get; }
-	public IRepository<AdComment> AdCommentRepository { get; }
-	public IRepository<AdFacility> AdFacilityRepository { get; }
-	public IRepository<FavoriteAd> FavoriteAdRepository { get; }
-    public IRepository<AdCategory> AdCategoryRepository { get; }
-	public IRepository<Permission> PermissionRepository { get; }
-	public IRepository<AdCommentFile> AdCommentFileRepository { get; }
-    public IRepository<AdPropertyValue> AdPropertyValueRepository { get; }
-	public IRepository<UserRolePermission> UserRolePermissionRepository { get; }
-    public IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; }
-
-    public async ValueTask BeginTransactionAsync()
+	public async ValueTask BeginTransactionAsync()
 	{
 		await context.Database.BeginTransactionAsync();
 	}

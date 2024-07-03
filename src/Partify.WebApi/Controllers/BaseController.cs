@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Partify.WebApi.Services;
-using System.Runtime.CompilerServices;
 
 namespace Partify.WebApi.Controllers;
 

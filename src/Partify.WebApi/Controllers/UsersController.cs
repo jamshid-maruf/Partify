@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Partify.Service.Configurations;
 using Partify.WebApi.ApiServices.Users;
 using Partify.WebApi.Models.Commons;
