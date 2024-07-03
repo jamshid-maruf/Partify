@@ -2,6 +2,7 @@
 using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Users;
 using Partify.WebApi.Models.AdViews;
+using Partify.WebApi.Models.FavoriteAds;
 using Partify.WebApi.Models.UserRoles;
 using Partify.WebApi.Models.Users;
 
@@ -23,6 +24,8 @@ public class MappingProfile : Profile
 
         CreateMap<AdView, AdViewViewModel>().ReverseMap();
 
+        CreateMap<FavoriteAd, FavoriteAdViewModel>().ReverseMap();
+        CreateMap<FavoriteAd, FavoriteAdCreateModel>().ReverseMap();
 
     }
 }
