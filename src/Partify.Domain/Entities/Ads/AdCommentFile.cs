@@ -8,5 +8,5 @@ public class AdCommentFile : Auditable
 	public long AdCommentId { get; set; }
 	public AdComment AdComment { get; set; }
 	public long? FileId { get; set; }
-	public Asset File { get; set; }
+	public AssetViewModel File { get; set; }
 }
