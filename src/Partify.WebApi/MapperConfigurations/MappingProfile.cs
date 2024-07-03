@@ -21,7 +21,8 @@ public class MappingProfile : Profile
         CreateMap<UserRole, UserRoleViewModel>().ReverseMap();
         CreateMap<AdImage, AdImageCreateModel>().ReverseMap();
         CreateMap<AdImage, AdImageViewModel>().ReverseMap();
-
+        CreateMap<FavoriteAd, FavoriteAdViewModel>().ReverseMap();
+        CreateMap<FavoriteAd, FavoriteAdCreateModel>().ReverseMap();
         CreateMap<AdScore, AdScoreCreateModel>().ReverseMap();
         CreateMap<AdScore, AdScoreViewModel>().ReverseMap();
     }
