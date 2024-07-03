@@ -2,6 +2,7 @@
 using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Users;
 using Partify.WebApi.Models.AdImages;
+using Partify.WebApi.Models.AdScores;
 using Partify.WebApi.Models.UserRoles;
 using Partify.WebApi.Models.Users;
 
@@ -23,6 +24,9 @@ public class MappingProfile : Profile
 
         CreateMap<AdImage, AdImageCreateModel>().ReverseMap();
         CreateMap<AdImage, AdImageViewModel>().ReverseMap();
+
+        CreateMap<AdScore, AdScoreCreateModel>().ReverseMap();
+        CreateMap<AdScore, AdScoreViewModel>().ReverseMap();
 
 
     }
