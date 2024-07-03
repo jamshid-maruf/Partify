@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Service.Configurations;
 using Partify.WebApi.ApiServices.Users;
 using Partify.WebApi.Models.Commons;
@@ -42,7 +43,7 @@ public class UsersController(IUserApiService userApiService) : BaseController
 	}
 
 	[HttpGet]
-	public async ValueTask<IActionResult> GetAsync(
+	public async ValueTask<IActionResult> GetListAsync(
 		[FromQuery] PaginationParams @params,
 		[FromQuery] Filter filter,
 		[FromQuery] string search = null)
@@ -56,13 +57,24 @@ public class UsersController(IUserApiService userApiService) : BaseController
 	}
 
 	[HttpPatch("change-password")]
-	public async ValueTask<IActionResult> PatchAsync(string oldPassword, string newPassword, string confirmPassword)
+	public async ValueTask<IActionResult> ChangePasswordAsync(string oldPassword, string newPassword, string confirmPassword)
 	{
 		return Ok(new Response
 		{
 			StatusCode = 200,
 			Message = "Success",
 			Data = await userApiService.ChangePasswordAsync(oldPassword, newPassword, confirmPassword)
+		});
+	}
+
+	[HttpPatch("change-role")]
+	public async ValueTask<IActionResult> ChangeRoleAsync(long userId, long roleId)
+	{
+		return Ok(new Response
+		{
+			StatusCode = 200,
+			Message = "Success",
+			Data = await userApiService.ChangeRoleAsync(userId, roleId)
 		});
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Partify.Service.Configurations;
+﻿using Partify.Domain.Entities.Users;
+using Partify.Service.Configurations;
 using Partify.WebApi.Models.Permissions;
 
 namespace Partify.WebApi.ApiServices.Permissions;

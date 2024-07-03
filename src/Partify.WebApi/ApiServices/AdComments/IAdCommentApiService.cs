@@ -10,4 +10,5 @@ public interface IAdCommentApiService
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<AdCommentViewModel> GetByIdAsync(long id);
 	ValueTask<IEnumerable<AdCommentViewModel>> GetAllAsync(PaginationParams @params, Filter filter);
+	ValueTask<AdCommentViewModel> AttachFileAsync(IFormFile file, long adCommentId);
 }

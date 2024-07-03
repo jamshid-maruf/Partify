@@ -25,6 +25,9 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 			throw new AlreadyExistException($"This user is already exist with this email and phone | Email={user.Email} & Phone={existUser.Phone}");
 		}
 
+		var roleWhichIsUser = await unitOfWork.UserRoleRepository.SelectAsync(u => u.Name.ToLower() == "user");
+
+		user.RoleId = roleWhichIsUser.Id;
 		user.Password = PasswordHasher.Hash(user.Password);
 		var json = JsonConvert.SerializeObject(user);
 		CacheSet($"registerKey-{user.Phone}", json);

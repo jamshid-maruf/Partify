@@ -5,6 +5,8 @@ using Partify.Service.Configurations;
 using Partify.Service.Exceptions;
 using Partify.Service.Extensions;
 using Partify.Service.Helpers;
+using Partify.Service.Services.Permissions;
+using Partify.Service.Services.UserRoles;
 
 namespace Partify.Service.Services.UserRolePermissions;
 
@@ -13,7 +15,7 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 	public async ValueTask<UserRolePermission> CreateAsync(UserRolePermission userRolePermission)
 	{
 		var alreadyExistUserRolePermission = await unitOfWork.UserRolePermissionRepository
-			   .SelectAsync(urp =>
+			   .SelectAsync(urp => 
 					urp.UserRoleId == userRolePermission.UserRoleId &&
 					urp.PermissionId == userRolePermission.PermissionId);
 		if (alreadyExistUserRolePermission is not null)
@@ -60,7 +62,7 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 			.OrderBy(filter);
 
 		if (!string.IsNullOrWhiteSpace(search))
-			userRolePermissions = userRolePermissions.Where(userRolePermission =>
+			userRolePermissions = userRolePermissions.Where(userRolePermission => 
 				userRolePermission.UserRole.Name.ToLower().Contains(search.ToLower()) ||
 				userRolePermission.Permission.Action.ToLower().Contains(search.ToLower()) ||
 				userRolePermission.Permission.Controller.ToLower().Contains(search.ToLower()));
@@ -82,7 +84,7 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 	{
 		var existUserRolePermission = await unitOfWork.UserRolePermissionRepository.SelectAsync(urp => urp.Id == id)
 			   ?? throw new NotFoundException($"This User Role Permission is not found with this ID={id}");
-
+		
 		var existUserRole = await unitOfWork.UserRoleRepository
 			.SelectAsync(r => r.Id == userRolePermission.UserRoleId)
 			?? throw new NotFoundException("User role is not found!");

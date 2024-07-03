@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Partify.DataAccess.UnitOfWorks;
 using Partify.Domain.Entities.Ads;
 using Partify.Service.Configurations;
 using Partify.Service.Exceptions;
 using Partify.Service.Extensions;
+using Partify.Service.Services.Assets;
 
 namespace Partify.Service.Services.AdComments;
 
-public class AdCommentService(IUnitOfWork unitOfWork) : IAdCommentService
+public class AdCommentService(IUnitOfWork unitOfWork, IAssetService assetService) : IAdCommentService
 {
 	public async ValueTask<AdComment> CreateAsync(AdComment adComment)
 	{
@@ -64,5 +66,28 @@ public class AdCommentService(IUnitOfWork unitOfWork) : IAdCommentService
 		var adComments = unitOfWork.AdCommentRepository.Select().OrderBy(filter);
 		var pagedAdComments = adComments.ToPaginateAsQueryable(@params);
 		return await pagedAdComments.ToListAsync();
+	}
+
+	public async ValueTask<AdComment> AttachFileAsync(IFormFile file, long adCommentId)
+	{
+		var exsitAdComment = await unitOfWork.AdCommentRepository
+			.SelectAsync(
+				expression: comment => comment.Id == adCommentId, 
+				includes: ["User", "Ad", "Files", "Files.AdComment", "Files.File"])
+			?? throw new NotFoundException($"Comment is not found with this ID={adCommentId}");
+
+		var createdFile = await assetService.UploadAsync(file, "images");
+
+		var adCommentFile = new AdCommentFile
+		{
+			FileId = createdFile.Id,
+			AdCommentId = exsitAdComment.Id,
+		};
+		await unitOfWork.AdCommentFileRepository.InsertAsync(adCommentFile);
+		await unitOfWork.SaveAsync();
+
+		exsitAdComment.Files.Add(adCommentFile);
+
+		return exsitAdComment;
 	}
 }

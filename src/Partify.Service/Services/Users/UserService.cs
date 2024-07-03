@@ -45,13 +45,14 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
 
 	public async ValueTask<User> GetAsync(long id)
 	{
-		return await unitOfWork.UserRepository.SelectAsync(user => user.Id == id)
+		return await unitOfWork.UserRepository
+			.SelectAsync(expression: user => user.Id == id, includes: ["Role"])
 			?? throw new NotFoundException("This user is not found");
 	}
 
 	public async ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
 	{
-		var users = unitOfWork.UserRepository.Select(isTracking: false);
+		var users = unitOfWork.UserRepository.Select(isTracking: false, includes: ["Role"]);
 
 		if (!string.IsNullOrWhiteSpace(search))
 			users = users.Where(u =>
@@ -75,6 +76,21 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
 			throw new ArgumentIsNotValidException("Password is not match");
 
 		existUser.Password = PasswordHasher.Hash(newPassword);
+		await unitOfWork.UserRepository.UpdateAsync(existUser);
+		await unitOfWork.SaveAsync();
+
+		return existUser;
+	}
+
+	public async ValueTask<User> ChangeRoleAsync(long userId, long roleId)
+	{
+		var existUser = await unitOfWork.UserRepository.SelectAsync(user => user.Id == userId)
+			?? throw new NotFoundException($"User is not found with this ID={userId}");
+
+		var existRole = await unitOfWork.UserRoleRepository.SelectAsync(role => role.Id == roleId)
+			?? throw new NotFoundException($"Role is not found with this ID={roleId}");
+
+		existUser.RoleId = roleId;
 		await unitOfWork.UserRepository.UpdateAsync(existUser);
 		await unitOfWork.SaveAsync();
 

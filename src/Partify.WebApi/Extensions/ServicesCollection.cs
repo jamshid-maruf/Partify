@@ -17,7 +17,14 @@ using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
 using Partify.WebApi.ApiServices.Accounts;
 using Partify.WebApi.ApiServices.AdComments;
+using Partify.WebApi.ApiServices.AdImages;
+using Partify.WebApi.ApiServices.Ads;
+using Partify.WebApi.ApiServices.AdScores;
+using Partify.WebApi.ApiServices.AdViews;
+using Partify.WebApi.ApiServices.Facilities;
+using Partify.WebApi.ApiServices.FavoriteAds;
 using Partify.WebApi.ApiServices.Permissions;
+using Partify.WebApi.ApiServices.UserRolePermissions;
 using Partify.WebApi.ApiServices.UserRoles;
 using Partify.WebApi.ApiServices.Users;
 using Partify.WebApi.Middlewares;
@@ -43,26 +50,24 @@ public static class ServicesCollection
 		services.AddScoped<IAdCommentService, AdCommentService>();
 		services.AddScoped<IFavoriteAdService, FavoriteAdService>();
 		services.AddScoped<IPermissionService, PermissionService>();
-		//services.AddScoped<IAdCommentFileService, AdCommentFileService>();
 		services.AddScoped<IUserRolePermissionService, UserRolePermissionService>();
 	}
 
 	public static void AddApiServices(this IServiceCollection services)
 	{
-		//services.AddScoped<IAdApiService, AdApiService>();
+		services.AddScoped<IAdApiService, AdApiService>();
 		services.AddScoped<IUserApiService, UserApiService>();
-		//services.AddScoped<IAdViewApiService, AdViewApiService>();
-		//services.AddScoped<IAdImageApiService, AdImageApiService>();
-		//services.AddScoped<IAdScoreApiService, AdScoreApiService>();
+		services.AddScoped<IAdViewApiService, AdViewApiService>();
+		services.AddScoped<IAdImageApiService, AdImageApiService>();
+		services.AddScoped<IAdScoreApiService, AdScoreApiService>();
 		services.AddScoped<IAccountApiService, AccountApiService>();
 		services.AddScoped<IUserRoleApiService, UserRoleApiService>();
-		//services.AddScoped<IFacilityApiService, FacilityApiService>();
+		services.AddScoped<IFacilityApiService, FacilityApiService>();
 		services.AddScoped<IUserRoleApiService, UserRoleApiService>();
 		services.AddScoped<IAdCommentApiService, AdCommentApiService>();
-		//services.AddScoped<IFavoriteAdApiService, FavoriteAdApiService>();
+		services.AddScoped<IFavoriteAdApiService, FavoriteAdApiService>();
 		services.AddScoped<IPermissionApiService, PermissionApiService>();
-		//services.AddScoped<IAdCommentFileApiService, AdCommentFileApiService>();
-		services.AddScoped<IUserRolePermissionService, UserRolePermissionService>();
+		services.AddScoped<IUserRolePermissionApiService, UserRolePermissionApiService>();
 	}
 
 	public static void AddExceptions(this IServiceCollection services)

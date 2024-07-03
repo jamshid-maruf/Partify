@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Partify.WebApi.Models.Commons;
 
 namespace Partify.WebApi.Middlewares;

@@ -4,5 +4,5 @@ namespace Partify.Service.Services.AdViews;
 
 public interface IAdViewService
 {
-	ValueTask<AdView> IncrementViewCountAsync(long adId);
+    ValueTask<AdView> IncrementViewCountAsync(long adId);
 }

@@ -10,4 +10,5 @@ public interface IUserService
 	ValueTask<User> GetAsync(long id);
 	ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
 	ValueTask<User> ChangePasswordAsync(string oldPasword, string newPassword, string confirmPassword);
+	ValueTask<User> ChangeRoleAsync(long userId, long roleId);
 }

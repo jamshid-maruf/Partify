@@ -36,4 +36,10 @@ public class UserApiService(IUserService userService, IMapper mapper) : IUserApi
 		var result = await userService.ChangePasswordAsync(oldPasword, newPassword, confirmPassword);
 		return mapper.Map<UserViewModel>(result);
 	}
+
+	public async ValueTask<UserViewModel> ChangeRoleAsync(long userId, long roleId)
+	{
+		var result = await userService.ChangeRoleAsync(userId, roleId);
+		return mapper.Map<UserViewModel>(result);
+	}
 }

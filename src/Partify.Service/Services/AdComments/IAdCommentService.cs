@@ -1,4 +1,5 @@
-﻿using Partify.Domain.Entities.Ads;
+﻿using Microsoft.AspNetCore.Http;
+using Partify.Domain.Entities.Ads;
 using Partify.Service.Configurations;
 
 namespace Partify.Service.Services.AdComments;
@@ -10,4 +11,5 @@ public interface IAdCommentService
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<AdComment> GetByIdAsync(long id);
 	ValueTask<IEnumerable<AdComment>> GetAllAsync(PaginationParams @params, Filter filter);
+	ValueTask<AdComment> AttachFileAsync(IFormFile file, long adCommentId);
 }

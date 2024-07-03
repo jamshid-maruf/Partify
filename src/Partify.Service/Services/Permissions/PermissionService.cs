@@ -13,7 +13,7 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 	public async ValueTask<Permission> CreateAsync(Permission permission)
 	{
 		var existPermission = await unitOfWork.PermissionRepository
-			.SelectAsync(p =>
+			.SelectAsync(p => 
 				p.Controller.ToLower() == permission.Controller.ToLower() &&
 				p.Action.ToLower() == permission.Action.ToLower());
 
@@ -21,7 +21,7 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 			throw new AlreadyExistException("This permission is already exist");
 
 		permission.CreatedById = HttpContextHelper.GetUserId;
-		var createdPermission = await unitOfWork.PermissionRepository.InsertAsync(permission);
+	 	var createdPermission = await unitOfWork.PermissionRepository.InsertAsync(permission);
 		await unitOfWork.SaveAsync();
 
 		return createdPermission;
@@ -41,7 +41,7 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 
 		return existPermission;
 	}
-
+	
 	public async ValueTask<bool> DeleteAsync(long id)
 	{
 		var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
@@ -51,7 +51,7 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 		await unitOfWork.SaveAsync();
 		return true;
 	}
-
+	
 	public async ValueTask<Permission> GetByIdAsync(long id)
 	{
 		var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
@@ -64,9 +64,9 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 	{
 		var permissions = unitOfWork.PermissionRepository.Select().OrderBy(filter);
 
-		if (!string.IsNullOrWhiteSpace(search))
-			permissions = permissions.Where(permission =>
-				permission.Action.ToLower().Contains(search.ToLower()) ||
+		if(!string.IsNullOrWhiteSpace(search))
+			permissions = permissions.Where(permission => 
+				permission.Action.ToLower().Contains(search.ToLower()) || 
 				permission.Controller.ToLower().Contains(search.ToLower()));
 
 		var pagedPemissions = permissions.ToPaginateAsQueryable(@params);
