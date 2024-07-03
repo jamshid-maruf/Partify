@@ -8,5 +8,5 @@ public class AdImage : Auditable
 	public long AdId { get; set; }
 	public Ad Ad { get; set; }
 	public long ImageId { get; set; }
-	public Asset Image { get; set; }
+	public AssetViewModel Image { get; set; }
 }
