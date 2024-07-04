@@ -47,11 +47,12 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 
 	public async ValueTask<IEnumerable<UserRolePermission>> GetAlByRoleIdAsync(long roleId)
 	{
-		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(r => r.Id == roleId)
+		var existUserRole = await unitOfWork.UserRoleRepository
+			.SelectAsync(expression: r => r.Id == roleId)
 			?? throw new NotFoundException("User role is not found!");
 
 		return await unitOfWork.UserRolePermissionRepository
-			.Select(p => p.UserRoleId == roleId)
+			.Select(expression: p => p.UserRoleId == roleId, includes: ["UserRole", "Permission"])
 			.ToListAsync();
 	}
 

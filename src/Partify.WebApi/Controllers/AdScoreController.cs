@@ -9,7 +9,7 @@ namespace Partify.WebApi.Controllers;
 public class AdScoreController(IAdScoreApiService adScoreApiService) : BaseController
 {
     [HttpPost("ad-or-update")]
-    public async ValueTask<IActionResult> AddOrUpdateScoreAsync(AdScoreCreateModel createModel)
+    public async ValueTask<IActionResult> UpsertScoreAsync(AdScoreCreateModel createModel)
     {
         return Ok(new Response
         {

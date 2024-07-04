@@ -1,11 +1,16 @@
 ﻿using AutoMapper;
 using Partify.Domain.Entities.Users;
 using Partify.Service.Services.Accounts;
+using Partify.Service.Services.UserRolePermissions;
+using Partify.WebApi.Models.Permissions;
 using Partify.WebApi.Models.Users;
 
 namespace Partify.WebApi.ApiServices.Accounts;
 
-public class AccountApiService(IAccountService accountService, IMapper mapper) : IAccountApiService
+public class AccountApiService(
+	IAccountService accountService, 
+	IUserRolePermissionService userRolePermissionService, 
+	IMapper mapper) : IAccountApiService
 {
 	public async ValueTask RegisterAsync(UserRegisterModel registerModel)
 	{
@@ -26,7 +31,10 @@ public class AccountApiService(IAccountService accountService, IMapper mapper) :
 	public async ValueTask<LoginViewModel> LoginAsync(long phone, string password)
 	{
 		var result = await accountService.LoginAsync(phone, password);
+		var rolePermissions = await userRolePermissionService.GetAlByRoleIdAsync(result.user.RoleId);
 		var mappedResult = mapper.Map<LoginViewModel>(result.user);
+		var permissions = rolePermissions.Select(p => p.Permission);
+		mappedResult.Permissions = mapper.Map<IEnumerable<PermissionViewModel>>(permissions);
 		mappedResult.Token = result.token;
 		return mappedResult;
 	}

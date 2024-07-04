@@ -8,7 +8,7 @@ namespace Partify.Service.Helpers;
 
 public static class AuthHelper
 {
-	public static string GenerateToken(User user)
+	public static string GenerateToken(long id, long phone, string role)
 	{
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var tokenKey = Encoding.UTF8.GetBytes(EnvironmentHelper.JwtKey);
@@ -16,9 +16,9 @@ public static class AuthHelper
 		{
 			Subject = new ClaimsIdentity(new Claim[]
 			{
-				 new Claim("Id", user.Id.ToString()),
-				 new Claim("Phone", user.Phone.ToString()),
-				 new Claim(ClaimTypes.Role, "User")
+				 new Claim("Id", id.ToString()),
+				 new Claim("Phone", phone.ToString()),
+				 new Claim(ClaimTypes.Role, role)
 			}),
 			Expires = DateTime.UtcNow.AddHours(Convert.ToInt32(EnvironmentHelper.TokenLifeTimeInHour)),
 			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

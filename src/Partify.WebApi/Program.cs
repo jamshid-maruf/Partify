@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Partify.DataAccess.DbContexts;
-using Partify.Service.Helpers;
 using Partify.WebApi.Extensions;
-using Partify.WebApi.Helpers;
 using Partify.WebApi.MapperConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,15 +32,9 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-ServiceHelper.InitializeServices(app.Services);
+app.AddInjectHelper();
 
-HttpContextHelper.ContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
-EnvironmentHelper.JwtKey = app.Configuration.GetSection("Jwt:Key").Value;
-EnvironmentHelper.TokenLifeTimeInHour = app.Configuration.GetSection("Jwt:LifeTime").Value;
-EnvironmentHelper.SmtpHost = app.Configuration.GetSection("Email:SmtpHost").Value;
-EnvironmentHelper.SmtpPort = app.Configuration.GetSection("Email:SmtpPort").Value;
-EnvironmentHelper.EmailAddress = app.Configuration.GetSection("Email:EmailAddress").Value;
-EnvironmentHelper.EmailPassword = app.Configuration.GetSection("Email:EmailPassword").Value;
+app.AddPathInitializer();
 
 app.UseSwagger();
 

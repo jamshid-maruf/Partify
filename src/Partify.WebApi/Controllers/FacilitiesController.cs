@@ -9,7 +9,7 @@ namespace Partify.WebApi.Controllers
 	public class FacilitiesController(IFacilityApiService facilityApiService) : BaseController
 	{
 		[HttpPost("create")]
-		public async ValueTask<IActionResult> CreateAsync(FacilityCreateModel createModel)
+		public async ValueTask<IActionResult> PostAsync(FacilityCreateModel createModel)
 		{
 			return Ok(new Response
 			{

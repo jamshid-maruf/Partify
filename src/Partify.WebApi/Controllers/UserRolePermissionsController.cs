@@ -9,7 +9,7 @@ namespace Partify.WebApi.Controllers
 	public class UserRolePermissionsController(IUserRolePermissionApiService userRolePermissionApiService) : BaseController
 	{
 		[HttpPost("create")]
-		public async ValueTask<IActionResult> CreateAsync(UserRolePermissionCreateModel createModel)
+		public async ValueTask<IActionResult> PostAsync(UserRolePermissionCreateModel createModel)
 		{
 			return Ok(new Response
 			{

@@ -4,6 +4,7 @@ using Partify.DataAccess.UnitOfWorks;
 using Partify.Domain.Entities.Users;
 using Partify.Service.Exceptions;
 using Partify.Service.Helpers;
+using System.Net.Http.Headers;
 
 namespace Partify.Service.Services.Accounts;
 
@@ -66,13 +67,31 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 
 	public async ValueTask<(User user, string token)> LoginAsync(long phone, string password)
 	{
-		var existUser = await unitOfWork.UserRepository.SelectAsync(user => user.Phone == phone)
+		if(EnvironmentHelper.SuperAdminLogin == phone.ToString() && EnvironmentHelper.SuperAdminPassword == password)
+		{
+			var superAdminRole = await unitOfWork.UserRoleRepository
+				.SelectAsync(role => role.Name.ToLower() == "superadmin");
+
+			var user = new User
+			{
+				Id = -1,
+				Role = superAdminRole,
+				RoleId = superAdminRole.Id,
+				Phone = Convert.ToInt64(EnvironmentHelper.SuperAdminLogin)
+			};
+			return (user: user,	token: AuthHelper.GenerateToken(-1, Convert.ToInt64(EnvironmentHelper.SuperAdminLogin), "SuperAdmin"));
+		}
+		else
+		{
+			var existUser = await unitOfWork.UserRepository
+				.SelectAsync(expression: user => user.Phone == phone, includes: ["Role"])
 			?? throw new ForbiddenException("Phone or Password is invalid");
 
-		if (!PasswordHasher.Verify(password, existUser.Password))
-			throw new ForbiddenException("Phone or Password is invalid");
+			if (!PasswordHasher.Verify(password, existUser.Password))
+				throw new ForbiddenException("Phone or Password is invalid");
 
-		return (user: existUser, token: AuthHelper.GenerateToken(existUser));
+			return (user: existUser, token: AuthHelper.GenerateToken(existUser.Id, existUser.Phone, existUser.Role.Name));
+		}
 	}
 
 	public async ValueTask<bool> SendCodeAsync(string email)

@@ -6,10 +6,10 @@ using Partify.WebApi.Models.FavoriteAds;
 
 namespace Partify.WebApi.Controllers;
 
-public class FavoriteAdController(IFavoriteAdApiService favoriteAdApiService) : BaseController
+public class FavoriteAdsController(IFavoriteAdApiService favoriteAdApiService) : BaseController
 {
     [HttpPost("Create")]
-    public async ValueTask<IActionResult> CreateAsync(FavoriteAdCreateModel favoriteAdCreateModel)
+    public async ValueTask<IActionResult> PostAsync(FavoriteAdCreateModel favoriteAdCreateModel)
     {
         return Ok(new Response
         {

@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Partify.DataAccess.UnitOfWorks;
+using Partify.Service.Helpers;
 using Partify.Service.Services.Accounts;
 using Partify.Service.Services.AdComments;
 using Partify.Service.Services.AdImages;
@@ -27,6 +28,7 @@ using Partify.WebApi.ApiServices.Permissions;
 using Partify.WebApi.ApiServices.UserRolePermissions;
 using Partify.WebApi.ApiServices.UserRoles;
 using Partify.WebApi.ApiServices.Users;
+using Partify.WebApi.Helpers;
 using Partify.WebApi.Middlewares;
 using System.Text;
 
@@ -77,6 +79,26 @@ public static class ServicesCollection
 		services.AddExceptionHandler<AlreadyExistExceptionMiddleware>();
 		services.AddExceptionHandler<InternalServerExceptionMiddleware>();
 		services.AddExceptionHandler<ArgumentIsNotValidExceptionMiddleware>();
+	}
+
+	public static void AddInjectHelper(this WebApplication app)
+	{
+		var scope = app.Services.CreateScope();
+		ServiceHelper.UserRoleService = scope.ServiceProvider.GetRequiredService<IUserRoleService>();
+		ServiceHelper.UserRolePermissionService = scope.ServiceProvider.GetRequiredService<IUserRolePermissionService>();
+	}
+
+	public static void AddPathInitializer(this WebApplication app)
+	{
+		HttpContextHelper.ContextAccessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+		EnvironmentHelper.JwtKey = app.Configuration.GetSection("Jwt:Key").Value;
+		EnvironmentHelper.TokenLifeTimeInHour = app.Configuration.GetSection("Jwt:LifeTime").Value;
+		EnvironmentHelper.SmtpHost = app.Configuration.GetSection("Email:SmtpHost").Value;
+		EnvironmentHelper.SmtpPort = app.Configuration.GetSection("Email:SmtpPort").Value;
+		EnvironmentHelper.EmailAddress = app.Configuration.GetSection("Email:EmailAddress").Value;
+		EnvironmentHelper.EmailPassword = app.Configuration.GetSection("Email:EmailPassword").Value;
+		EnvironmentHelper.SuperAdminLogin = app.Configuration.GetSection("SuperAdmin:Login").Value;
+		EnvironmentHelper.SuperAdminPassword = app.Configuration.GetSection("SuperAdmin:Password").Value;
 	}
 
 	public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
