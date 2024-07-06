@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Partify.DataAccess.UnitOfWorks;
 using Partify.Service.Helpers;
 using Partify.Service.Services.Accounts;
+using Partify.Service.Services.AdCategories;
 using Partify.Service.Services.AdComments;
 using Partify.Service.Services.AdImages;
 using Partify.Service.Services.Ads;
@@ -17,6 +18,7 @@ using Partify.Service.Services.UserRolePermissions;
 using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
 using Partify.WebApi.ApiServices.Accounts;
+using Partify.WebApi.ApiServices.AdCategories;
 using Partify.WebApi.ApiServices.AdComments;
 using Partify.WebApi.ApiServices.AdImages;
 using Partify.WebApi.ApiServices.Ads;
@@ -52,6 +54,7 @@ public static class ServicesCollection
 		services.AddScoped<IAdCommentService, AdCommentService>();
 		services.AddScoped<IFavoriteAdService, FavoriteAdService>();
 		services.AddScoped<IPermissionService, PermissionService>();
+		services.AddScoped<IAdCategoryService, AdCategoryService>();
 		services.AddScoped<IUserRolePermissionService, UserRolePermissionService>();
 	}
 
@@ -69,6 +72,7 @@ public static class ServicesCollection
 		services.AddScoped<IAdCommentApiService, AdCommentApiService>();
 		services.AddScoped<IFavoriteAdApiService, FavoriteAdApiService>();
 		services.AddScoped<IPermissionApiService, PermissionApiService>();
+		services.AddScoped<IAdCategoryApiService, AdCategoryApiService>();
 		services.AddScoped<IUserRolePermissionApiService, UserRolePermissionApiService>();
 	}
 
