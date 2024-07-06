@@ -8,8 +8,8 @@ namespace Partify.WebApi.Controllers;
 
 public class AdCommentsController(IAdCommentApiService adCommentApiService) : BaseController
 {
-	[HttpPost("create")]
-	public async ValueTask<IActionResult> CreateAsync(AdCommentCreateModel createModel)
+	[HttpPost]
+	public async ValueTask<IActionResult> PostAsync(AdCommentCreateModel createModel)
 	{
 		return Ok(new Response
 		{
@@ -53,7 +53,7 @@ public class AdCommentsController(IAdCommentApiService adCommentApiService) : Ba
 	}
 
 	[HttpGet]
-	public async ValueTask<IActionResult> GetAsync(
+	public async ValueTask<IActionResult> GetListAsync(
 		[FromQuery] PaginationParams @params,
 		[FromQuery] Filter filter)
 	{

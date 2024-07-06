@@ -57,7 +57,10 @@ public class UsersController(IUserApiService userApiService) : BaseController
 	}
 
 	[HttpPatch("change-password")]
-	public async ValueTask<IActionResult> ChangePasswordAsync(string oldPassword, string newPassword, string confirmPassword)
+	public async ValueTask<IActionResult> ChangePasswordAsync(
+		string oldPassword, 
+		string newPassword, 
+		string confirmPassword)
 	{
 		return Ok(new Response
 		{

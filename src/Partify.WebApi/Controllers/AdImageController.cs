@@ -8,8 +8,8 @@ namespace Partify.WebApi.Controllers;
 
 public class AdImageController(IAdImageApiService adImageApiService) : BaseController
 {
-    [HttpPost("Create")]
-    public async ValueTask<IActionResult> CreateAsync(AdImageCreateModel createModel, IFormFile formFile)
+    [HttpPost]
+    public async ValueTask<IActionResult> PostAsync(AdImageCreateModel createModel, IFormFile formFile)
     {
         return Ok(new Response
         {
@@ -31,7 +31,7 @@ public class AdImageController(IAdImageApiService adImageApiService) : BaseContr
     }
 
     [HttpGet("{id:long}")]
-    public async ValueTask<IActionResult> GetByIdAsync(long id)
+    public async ValueTask<IActionResult> GetAsync(long id)
     {
         return Ok(new Response
         {
@@ -42,7 +42,7 @@ public class AdImageController(IAdImageApiService adImageApiService) : BaseContr
     }
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetAllAsync(long adId, Filter filter)
+    public async ValueTask<IActionResult> GetListAsync(long adId, Filter filter)
     {
         return Ok(new Response
         {

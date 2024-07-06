@@ -8,7 +8,7 @@ namespace Partify.WebApi.Controllers;
 
 public class PermissionsController(IPermissionApiService permissionApiService) : BaseController
 {
-	[HttpPost("create")]
+	[HttpPost]
 	public async ValueTask<IActionResult> PostAsync(PermissionCreateModel createModel)
 	{
 		return Ok(new Response
@@ -29,6 +29,7 @@ public class PermissionsController(IPermissionApiService permissionApiService) :
 			Data = await permissionApiService.UpdateAsync(id, updateModel)
 		});
 	}
+
 	[HttpDelete("{id:long}")]
 	public async ValueTask<IActionResult> DeleteAsync(long id)
 	{
@@ -39,6 +40,7 @@ public class PermissionsController(IPermissionApiService permissionApiService) :
 			Data = await permissionApiService.DeleteAsync(id)
 		});
 	}
+
 	[HttpGet("{id:long}")]
 	public async ValueTask<IActionResult> GetAsync(long id)
 	{
@@ -51,7 +53,7 @@ public class PermissionsController(IPermissionApiService permissionApiService) :
 	}
 
 	[HttpGet]
-	public async ValueTask<IActionResult> GetAsync(
+	public async ValueTask<IActionResult> GetListAsync(
 		[FromQuery] PaginationParams @params,
 		[FromQuery] Filter filter,
 		[FromQuery] string search = null)

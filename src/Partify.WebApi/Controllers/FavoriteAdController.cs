@@ -8,7 +8,7 @@ namespace Partify.WebApi.Controllers;
 
 public class FavoriteAdsController(IFavoriteAdApiService favoriteAdApiService) : BaseController
 {
-    [HttpPost("Create")]
+    [HttpPost]
     public async ValueTask<IActionResult> PostAsync(FavoriteAdCreateModel favoriteAdCreateModel)
     {
         return Ok(new Response
@@ -31,7 +31,7 @@ public class FavoriteAdsController(IFavoriteAdApiService favoriteAdApiService) :
     }
 
     [HttpGet("{id:long}")]
-    public async ValueTask<IActionResult> GetByIdAsync(long id)
+    public async ValueTask<IActionResult> GetAsync(long id)
     {
         return Ok(new Response
         {
@@ -42,7 +42,7 @@ public class FavoriteAdsController(IFavoriteAdApiService favoriteAdApiService) :
     }
 
     [HttpGet]
-    public async ValueTask<IActionResult> GetAllAsync(PaginationParams @params)
+    public async ValueTask<IActionResult> GetListAsync([FromQuery] PaginationParams @params)
     {
         return Ok(new Response
         {

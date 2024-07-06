@@ -8,8 +8,8 @@ namespace Partify.WebApi.Controllers
 {
     public class AdCategoriesController(IAdCategoryApiService adCategoryApiService) : BaseController
     {
-        [HttpPost("create")]
-        public async ValueTask<IActionResult> CreateAsync(AdCategoryCreateModel createModel)
+        [HttpPost]
+        public async ValueTask<IActionResult> PostAsync(AdCategoryCreateModel createModel)
         {
             return Ok(new Response
             {
@@ -50,7 +50,7 @@ namespace Partify.WebApi.Controllers
         }
 
         [HttpGet]
-        public async ValueTask<IActionResult> GetAsync(
+        public async ValueTask<IActionResult> GetListAsync(
             [FromQuery] PaginationParams @params,
             [FromQuery] Filter filter,
             [FromQuery] string search = null)
