@@ -31,7 +31,7 @@ public class AccountApiService(
 	public async ValueTask<LoginViewModel> LoginAsync(long phone, string password)
 	{
 		var result = await accountService.LoginAsync(phone, password);
-		var rolePermissions = await userRolePermissionService.GetAlByRoleIdAsync(result.user.RoleId);
+		var rolePermissions = await userRolePermissionService.GetAllByRoleIdAsync(result.user.RoleId);
 		var mappedResult = mapper.Map<LoginViewModel>(result.user);
 		var permissions = rolePermissions.Select(p => p.Permission);
 		mappedResult.Permissions = mapper.Map<IEnumerable<PermissionViewModel>>(permissions);

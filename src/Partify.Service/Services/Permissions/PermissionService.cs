@@ -10,66 +10,66 @@ namespace Partify.Service.Services.Permissions;
 
 public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 {
-	public async ValueTask<Permission> CreateAsync(Permission permission)
-	{
-		var existPermission = await unitOfWork.PermissionRepository
-			.SelectAsync(p => 
-				p.Controller.ToLower() == permission.Controller.ToLower() &&
-				p.Action.ToLower() == permission.Action.ToLower());
+    public async ValueTask<Permission> CreateAsync(Permission permission)
+    {
+        var existPermission = await unitOfWork.PermissionRepository
+            .SelectAsync(p =>
+                p.Controller.ToLower() == permission.Controller.ToLower() &&
+                p.Action.ToLower() == permission.Action.ToLower());
 
-		if (existPermission is not null)
-			throw new AlreadyExistException("This permission is already exist");
+        if (existPermission is not null)
+            throw new AlreadyExistException($"Permission is already exist with this controller= {permission.Controller} and action= {permission.Action}!");
 
-		permission.CreatedById = HttpContextHelper.GetUserId;
-	 	var createdPermission = await unitOfWork.PermissionRepository.InsertAsync(permission);
-		await unitOfWork.SaveAsync();
+        permission.CreatedById = HttpContextHelper.GetUserId;
+        var createdPermission = await unitOfWork.PermissionRepository.InsertAsync(permission);
+        await unitOfWork.SaveAsync();
 
-		return createdPermission;
-	}
+        return createdPermission;
+    }
 
-	public async ValueTask<Permission> UpdateAsync(long id, Permission permission)
-	{
-		var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
-			?? throw new NotFoundException($"This permission is not found with this ID={id}");
+    public async ValueTask<Permission> UpdateAsync(long id, Permission permission)
+    {
+        var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
+            ?? throw new NotFoundException($"Permission is not found with this ID= {id}!");
 
-		existPermission.Action = permission.Action;
-		existPermission.Controller = permission.Controller;
-		existPermission.UpdatedById = HttpContextHelper.GetUserId;
+        existPermission.Action = permission.Action;
+        existPermission.Controller = permission.Controller;
+        existPermission.UpdatedById = HttpContextHelper.GetUserId;
 
-		var updatedPermission = await unitOfWork.PermissionRepository.UpdateAsync(existPermission);
-		await unitOfWork.SaveAsync();
+        var updatedPermission = await unitOfWork.PermissionRepository.UpdateAsync(existPermission);
+        await unitOfWork.SaveAsync();
 
-		return existPermission;
-	}
-	
-	public async ValueTask<bool> DeleteAsync(long id)
-	{
-		var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
-			?? throw new NotFoundException($"This permission is not found with this ID={id}");
+        return existPermission;
+    }
 
-		await unitOfWork.PermissionRepository.DeleteAsync(existPermission);
-		await unitOfWork.SaveAsync();
-		return true;
-	}
-	
-	public async ValueTask<Permission> GetByIdAsync(long id)
-	{
-		var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
-			?? throw new NotFoundException($"This permission is not found with this ID={id}");
+    public async ValueTask<bool> DeleteAsync(long id)
+    {
+        var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
+            ?? throw new NotFoundException($"Permission is not found with this ID= {id}!");
 
-		return existPermission;
-	}
+        await unitOfWork.PermissionRepository.DeleteAsync(existPermission);
+        await unitOfWork.SaveAsync();
+        return true;
+    }
 
-	public async ValueTask<IEnumerable<Permission>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
-	{
-		var permissions = unitOfWork.PermissionRepository.Select().OrderBy(filter);
+    public async ValueTask<Permission> GetByIdAsync(long id)
+    {
+        var existPermission = await unitOfWork.PermissionRepository.SelectAsync(p => p.Id == id)
+            ?? throw new NotFoundException($"Permission is not found with this ID= {id}!");
 
-		if(!string.IsNullOrWhiteSpace(search))
-			permissions = permissions.Where(permission => 
-				permission.Action.ToLower().Contains(search.ToLower()) || 
-				permission.Controller.ToLower().Contains(search.ToLower()));
+        return existPermission;
+    }
 
-		var pagedPemissions = permissions.ToPaginateAsQueryable(@params);
-		return await pagedPemissions.ToListAsync();
-	}
+    public async ValueTask<IEnumerable<Permission>> GetAllAsync(PaginationParams @params, Filter filter, string search = null)
+    {
+        var permissions = unitOfWork.PermissionRepository.Select().OrderBy(filter);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            permissions = permissions.Where(permission =>
+                permission.Action.ToLower().Contains(search.ToLower()) ||
+                permission.Controller.ToLower().Contains(search.ToLower()));
+
+        var pagedPemissions = permissions.ToPaginateAsQueryable(@params);
+        return await pagedPemissions.ToListAsync();
+    }
 }

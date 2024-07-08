@@ -1,12 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Partify.WebApi.ApiServices.AdScores;
 using Partify.WebApi.Models.AdScores;
 using Partify.WebApi.Models.Commons;
 
 namespace Partify.WebApi.Controllers;
 
-public class AdScoreController(IAdScoreApiService adScoreApiService) : BaseController
+public class AdScoresController(IAdScoreApiService adScoreApiService) : BaseController
 {
     [HttpPost("ad-or-update")]
     public async ValueTask<IActionResult> UpsertScoreAsync(AdScoreCreateModel createModel)

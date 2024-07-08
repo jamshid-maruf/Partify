@@ -40,9 +40,9 @@ public class UserRolePermissionApiService(IUserRolePermissionService userRolePer
 		return mapper.Map<IEnumerable<UserRolePermissionViewModel>>(result);
 	}
 
-	public async ValueTask<IEnumerable<UserRolePermissionViewModel>> GetAlByRoleIdAsync(long roleId)
+	public async ValueTask<IEnumerable<UserRolePermissionViewModel>> GetAllByRoleIdAsync(long roleId)
 	{
-		var result = await userRolePermissionService.GetAlByRoleIdAsync(roleId);
+		var result = await userRolePermissionService.GetAllByRoleIdAsync(roleId);
 		return mapper.Map<IEnumerable<UserRolePermissionViewModel>>(result);
 	}
 }

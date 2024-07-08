@@ -15,7 +15,7 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Name.ToLower() == userRole.Name.ToLower());
 
 		if (existUserRole != null)
-			throw new AlreadyExistException("UserRole is already exist");
+			throw new AlreadyExistException($"User role is already exist with this name= {userRole.Name}!");
 
 		userRole.CreatedById = HttpContextHelper.GetUserId;
 		var createdUserRole = await unitOfWork.UserRoleRepository.InsertAsync(userRole);
@@ -27,7 +27,7 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
     public async ValueTask<UserRole> UpdateAsync(long id, UserRole userRole)
     {
         var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+            ?? throw new NotFoundException($"User role is not found with this ID= {id}!");
 
 		existUserRole.Name = userRole.Name;
         await unitOfWork.UserRoleRepository.UpdateAsync(existUserRole);
@@ -39,7 +39,7 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
     public async ValueTask<bool> DeleteAsync(long id)
 	{
 		var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+            ?? throw new NotFoundException($"User role is not found with this ID= {id}!");
 
 		await unitOfWork.UserRoleRepository.DeleteAsync(existUserRole);
 		await unitOfWork.SaveAsync();
@@ -61,7 +61,7 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 	public async ValueTask<UserRole> GetByIdAsync(long id)
 	{
         var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
-            ?? throw new NotFoundException($"This user role is not found with this ID={id}");
+            ?? throw new NotFoundException($"User role is not found with this ID= {id}!");
 
 		return existUserRole;
     }
@@ -70,7 +70,7 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
 	{
 		var existUserRole = await unitOfWork.UserRoleRepository
 			.SelectAsync(role => role.Name.ToLower() == name.ToLower())
-		   ?? throw new NotFoundException($"This user role is not found with this name={name}");
+		   ?? throw new NotFoundException($"User role is not found with this name= {name}!");
 
 		return existUserRole;
 	}
