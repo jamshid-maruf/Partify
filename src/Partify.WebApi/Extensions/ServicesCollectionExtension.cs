@@ -32,11 +32,12 @@ using Partify.WebApi.ApiServices.UserRoles;
 using Partify.WebApi.ApiServices.Users;
 using Partify.WebApi.Helpers;
 using Partify.WebApi.Middlewares;
+using Partify.WebApi.Validators.Accounts;
 using System.Text;
 
 namespace Partify.WebApi.Extensions;
 
-public static class ServicesCollection
+public static class ServicesCollectionExtension
 {
 	public static void AddServices(this IServiceCollection services)
 	{
@@ -103,6 +104,16 @@ public static class ServicesCollection
 		EnvironmentHelper.EmailPassword = app.Configuration.GetSection("Email:EmailPassword").Value;
 		EnvironmentHelper.SuperAdminLogin = app.Configuration.GetSection("SuperAdmin:Login").Value;
 		EnvironmentHelper.SuperAdminPassword = app.Configuration.GetSection("SuperAdmin:Password").Value;
+	}
+
+	public static void AddValidators(this IServiceCollection services)
+	{
+		services.AddTransient<AccountLoginValidator>();
+		services.AddTransient<AccountCreateValidator>();
+		services.AddTransient<AccountVerifyValidator>();
+		services.AddTransient<AccountSendCodeValidator>();
+		services.AddTransient<AccountRegisterModelValidator>();
+		services.AddTransient<AccountResetPasswordValidator>();
 	}
 
 	public static void AddJwt(this IServiceCollection services, IConfiguration configuration)

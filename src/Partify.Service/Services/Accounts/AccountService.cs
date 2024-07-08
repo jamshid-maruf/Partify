@@ -33,27 +33,27 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 		var json = JsonConvert.SerializeObject(user);
 		CacheSet($"registerKey-{user.Phone}", json);
 
-		await EmailHelper.SendCodeAsync(memoryCache, user.Email, $"registerCodeKey-{user.Phone}");
+		await EmailHelper.SendCodeAsync(memoryCache, user.Email, $"registerCodeKey-{user.Email}");
 	}
 
-	public async ValueTask RegisterVerifyAsync(long phone, string code)
+	public async ValueTask RegisterVerifyAsync(string email, string code)
 	{
-		var codeInCache = memoryCache.Get($"registerCodeKey-{phone}");
+		var codeInCache = memoryCache.Get($"registerCodeKey-{email}");
 		if (codeInCache?.ToString() != code)
 			throw new ArgumentIsNotValidException("Invalid code");
 
-		CacheSet($"verifiedAccount-{phone}", "verified");
+		CacheSet($"verifiedAccount-{email}", "verified");
 
 		await Task.CompletedTask;
 	}
 
-	public async ValueTask<User> CreateAsync(long phone)
+	public async ValueTask<User> CreateAsync(string email)
 	{
-		var cacheValue = memoryCache.Get($"verifiedAccount-{phone}");
+		var cacheValue = memoryCache.Get($"verifiedAccount-{email}");
 		if (cacheValue is null)
 			throw new ArgumentIsNotValidException("Account is not verified");
 
-		var json = memoryCache.Get($"registerKey-{phone}");
+		var json = memoryCache.Get($"registerKey-{email}");
 		var user = JsonConvert.DeserializeObject<User>(json.ToString());
 
 		var createdUser = await unitOfWork.UserRepository.InsertAsync(user);
@@ -118,9 +118,9 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 		return true;
 	}
 
-	public async ValueTask<User> ResetPasswordAsync(long phone, string newPassword)
+	public async ValueTask<User> ResetPasswordAsync(string email, string newPassword)
 	{
-		var existUser = await unitOfWork.UserRepository.SelectAsync(user => user.Phone == phone)
+		var existUser = await unitOfWork.UserRepository.SelectAsync(user => user.Email == email)
 			?? throw new ForbiddenException("This user is not found");
 
 		var cacheValue = memoryCache.Get($"verified-{existUser.Email}");

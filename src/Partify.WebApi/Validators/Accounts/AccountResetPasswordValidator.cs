@@ -1,0 +1,20 @@
+﻿using FluentValidation;
+using Partify.WebApi.Helpers;
+
+namespace Partify.WebApi.Validators.Accounts;
+
+public class AccountResetPasswordValidator : AbstractValidator<(string email, string newPassword)>
+{
+	public AccountResetPasswordValidator()
+	{
+		RuleFor(model => model.email)
+			.NotNull()
+			.Must(ValidationHelper.IsValidEmail)
+			.WithMessage(model => $"{nameof(model.email)} is not valid");
+
+		RuleFor(model => model.newPassword)
+			.NotNull()
+			.Must(ValidationHelper.IsHardPassword)
+			.WithMessage(model => $"{nameof(model.newPassword)} is not valid");
+	}
+}

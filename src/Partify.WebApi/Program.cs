@@ -18,6 +18,8 @@ builder.Services.AddApiServices();
 
 builder.Services.AddServices();
 
+builder.Services.AddValidators();
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.ConfigureSwagger();

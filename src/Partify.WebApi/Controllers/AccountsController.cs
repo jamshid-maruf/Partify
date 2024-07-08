@@ -21,9 +21,9 @@ public class AccountsController(IAccountApiService accountApiService) : Controll
 	}
 
 	[HttpGet("register-verify")]
-	public async ValueTask<IActionResult> RegisterVerifyAsync(long phone, string code)
+	public async ValueTask<IActionResult> RegisterVerifyAsync(string email, string code)
 	{
-		await accountApiService.RegisterVerifyAsync(phone, code);
+		await accountApiService.RegisterVerifyAsync(email, code);
 		return Ok(new Response
 		{
 			StatusCode = 200,
@@ -32,13 +32,13 @@ public class AccountsController(IAccountApiService accountApiService) : Controll
 	}
 
 	[HttpPost("create")]
-	public async ValueTask<IActionResult> CreateAsync(long phone)
+	public async ValueTask<IActionResult> CreateAsync(string email)
 	{
 		return Ok(new Response
 		{
 			StatusCode = 200,
 			Message = "Success",
-			Data = await accountApiService.CreateAsync(phone)
+			Data = await accountApiService.CreateAsync(email)
 		});
 	}
 
@@ -77,13 +77,13 @@ public class AccountsController(IAccountApiService accountApiService) : Controll
 
 
 	[HttpPost("reset-password")]
-	public async ValueTask<IActionResult> ResetPasswordAsync(long phone, string newPassword)
+	public async ValueTask<IActionResult> ResetPasswordAsync(string email, string newPassword)
 	{
 		return Ok(new Response
 		{
 			StatusCode = 200,
 			Message = "Success",
-			Data = await accountApiService.ResetPasswordAsync(phone, newPassword)
+			Data = await accountApiService.ResetPasswordAsync(email, newPassword)
 		});
 	}
 }
