@@ -3,6 +3,7 @@ using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Facilities;
 using Partify.Domain.Entities.Users;
 using Partify.WebApi.Models.AdCategories;
+using Partify.WebApi.Models.AdCategoryProperties;
 using Partify.WebApi.Models.AddComments;
 using Partify.WebApi.Models.AdImages;
 using Partify.WebApi.Models.Ads;
@@ -65,5 +66,9 @@ public class MappingProfile : Profile
         CreateMap<AdCategoryCreateModel, AdCategory>();
         CreateMap<AdCategoryUpdateModel, AdCategory>();
         CreateMap<AdCategory, AdCategoryViewModel>();
+
+        CreateMap<AdCategoryPropertyCreateModel, AdCategoryProperty>();
+        CreateMap<AdCategoryPropertyUpdateModel, AdCategoryProperty>();
+        CreateMap<AdCategoryProperty, AdCategoryPropertyViewModel>();
     }
 }
