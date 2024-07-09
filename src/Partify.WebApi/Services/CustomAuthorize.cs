@@ -31,7 +31,7 @@ namespace Partify.WebApi.Services;
 
 			var userRolePermissionService = ServiceHelper.UserRolePermissionService;
 			var permissions = userRolePermissionService
-				.GetAlByRoleIdAsync(userRole.Id)
+				.GetAllByRoleIdAsync(userRole.Id)
 				.GetAwaiter()
 				.GetResult();
 

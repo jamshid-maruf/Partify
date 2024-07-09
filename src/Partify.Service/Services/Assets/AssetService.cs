@@ -38,7 +38,7 @@ public class AssetService(IUnitOfWork unitOfWork) : IAssetService
 	public async ValueTask<bool> DeleteAsync(long id)
 	{
 		var existFile = await unitOfWork.AssetRepository.SelectAsync(file => file.Id == id)
-			?? throw new NotFoundException($"File is not found with this ID={id}");
+			?? throw new NotFoundException($"File is not found with this ID= {id}!");
 
 		await unitOfWork.AssetRepository.DeleteAsync(existFile);
 		await unitOfWork.SaveAsync();
@@ -48,7 +48,7 @@ public class AssetService(IUnitOfWork unitOfWork) : IAssetService
 	public async ValueTask<Asset> GetByIdAsync(long id)
 	{
 		var existFile = await unitOfWork.AssetRepository.SelectAsync(file => file.Id == id)
-			?? throw new NotFoundException($"File is not found with this ID={id}");
+			?? throw new NotFoundException($"File is not found with this ID= {id}!");
 
 		return existFile;
 	}

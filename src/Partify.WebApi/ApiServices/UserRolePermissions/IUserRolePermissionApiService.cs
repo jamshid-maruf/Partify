@@ -9,7 +9,7 @@ public interface IUserRolePermissionApiService
 	ValueTask<UserRolePermissionViewModel> UpdateAsync(long id, UserRolePermissionUpdateModel updateModel);
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<UserRolePermissionViewModel> GetByIdAsync(long id);
-	ValueTask<IEnumerable<UserRolePermissionViewModel>> GetAlByRoleIdAsync(long roleId);
+	ValueTask<IEnumerable<UserRolePermissionViewModel>> GetAllByRoleIdAsync(long roleId);
 	ValueTask<IEnumerable<UserRolePermissionViewModel>> GetAllAsync(
 		PaginationParams @params,
 		Filter filter,
