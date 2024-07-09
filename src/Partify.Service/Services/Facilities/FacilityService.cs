@@ -15,7 +15,7 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 		var alreadyExistFacility = await unitOfWork.FacilityRepository
 			.SelectAsync(f => f.Name.ToLower() == facility.Name.ToLower());
 		if (alreadyExistFacility is not null)
-			throw new AlreadyExistException($"This facility is already exist with this name={facility.Name}");
+			throw new AlreadyExistException($"Facility is already exist with this name= {facility.Name}!");
 
 		facility.CreatedById = HttpContextHelper.GetUserId;
 		var createdFacility = await unitOfWork.FacilityRepository.InsertAsync(facility);
@@ -26,12 +26,12 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 	public async ValueTask<Facility> UpdateAsync(long id, Facility facility)
 	{
 		var existFacility = await unitOfWork.FacilityRepository.SelectAsync(t => t.Id == id)
-			?? throw new NotFoundException($"This facility is not found with this ID={id}");
+			?? throw new NotFoundException($"Facility is not found with this ID= {id}!");
 
 		var alreadyExistFacility = await unitOfWork.FacilityRepository
 			.SelectAsync(f => f.Id != id && f.Name.ToLower() == facility.Name.ToLower());
 		if (alreadyExistFacility is not null)
-			throw new AlreadyExistException($"This facility is already exist with this name={facility.Name}");
+			throw new AlreadyExistException($"Facility is already exist with this name= {facility.Name}!");
 
 		existFacility.Name = facility.Name;
 		existFacility.Icon = facility.Icon;
@@ -43,7 +43,7 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 	public async ValueTask<bool> DeleteAsync(long id)
 	{
 		var existFacility = await unitOfWork.FacilityRepository.SelectAsync(t => t.Id == id)
-			?? throw new NotFoundException($"This facility is not found with this ID={id}");
+			?? throw new NotFoundException($"Facility is not found with this ID= {id}!");
 
 		await unitOfWork.FacilityRepository.DeleteAsync(existFacility);
 		await unitOfWork.SaveAsync();
@@ -53,7 +53,7 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 	public async ValueTask<Facility> GetByIdAsync(long id)
 	{
 		var existFacility = await unitOfWork.FacilityRepository.SelectAsync(t => t.Id == id)
-			?? throw new NotFoundException($"This facility is not found with this ID={id}");
+			?? throw new NotFoundException($"Facility is not found with this ID= {id}!");
 
 		return existFacility;
 	}

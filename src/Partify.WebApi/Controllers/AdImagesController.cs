@@ -6,7 +6,7 @@ using Partify.WebApi.Models.Commons;
 
 namespace Partify.WebApi.Controllers;
 
-public class AdImageController(IAdImageApiService adImageApiService) : BaseController
+public class AdImagesController(IAdImageApiService adImageApiService) : BaseController
 {
     [HttpPost("Create")]
     public async ValueTask<IActionResult> CreateAsync(AdImageCreateModel createModel, IFormFile formFile)

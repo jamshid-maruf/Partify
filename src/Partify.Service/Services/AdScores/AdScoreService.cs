@@ -10,9 +10,9 @@ public class AdScoreService(IUnitOfWork unitOfWork) : IAdScoreService
     public async ValueTask<AdScore> AddOrUpdateScoreAsync(AdScore adScore)
     {
         var exsitUser = await unitOfWork.UserRepository.SelectAsync(user => user.Id == adScore.UserId)
-                ?? throw new NotFoundException("This user is not found");
+                ?? throw new NotFoundException($"User is not found with this ID= {adScore.UserId}!");
         var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == adScore.AdId)
-            ?? throw new NotFoundException($"Ad is not found");
+            ?? throw new NotFoundException($"Ad is not found with this ID= {adScore.AdId}!");
 
         var existAdScore = await unitOfWork.AdScoreRepository.SelectAsync(adScore => adScore.Id == adScore.AdId);
 
@@ -34,7 +34,7 @@ public class AdScoreService(IUnitOfWork unitOfWork) : IAdScoreService
     public async ValueTask<bool> DeleteAsync(long id)
     {
         var existAdScore = await unitOfWork.AdScoreRepository.SelectAsync(adScore => adScore.Id == adScore.AdId)
-            ?? throw new NotFoundException("Ad Score is not found");
+            ?? throw new NotFoundException($"Ad score is not found with this ID= {id}!");
 
         await unitOfWork.AdScoreRepository.DeleteAsync(existAdScore);
         await unitOfWork.SaveAsync();

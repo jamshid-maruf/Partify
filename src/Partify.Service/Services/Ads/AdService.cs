@@ -14,11 +14,11 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
     {
         var existAdCategory = await unitOfWork.AdCategoryRepository
             .SelectAsync(category => category.Id == ad.AdCategoryId)
-            ?? throw new NotFoundException($"Category is not found with this ID={ad.AdCategoryId}");
+            ?? throw new NotFoundException($"Category is not found with this ID= {ad.AdCategoryId}!");
 
         var exsitMerchant = await unitOfWork.MerchantRepository
             .SelectAsync(merchant => merchant.Id == ad.MerchantId)
-            ?? throw new NotFoundException($"Merchant is not found with this ID={ad.MerchantId}");
+            ?? throw new NotFoundException($"Merchant is not found with this ID={ad.MerchantId}!");
 
         var createdAd = await unitOfWork.AdRepository.InsertAsync(ad);
         await unitOfWork.SaveAsync();
@@ -29,7 +29,7 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
     public async ValueTask<Ad> UpdateAsync(long id, Ad ad)
     {
         var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == id)
-            ?? throw new NotFoundException($"Ad is not found with this ID={id}");
+            ?? throw new NotFoundException($"Ad is not found with this ID= {id}!");
 
         existAd.Phone = ad.Phone;
         existAd.Price = ad.Price;
@@ -50,7 +50,7 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
     public async ValueTask<bool> DeleteAsync(long id)
     {
         var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == id)
-            ?? throw new NotFoundException($"Ad is not found with this ID={id}");
+            ?? throw new NotFoundException($"Ad is not found with this ID= {id}!");
 
         await unitOfWork.AdRepository.DeleteAsync(existAd);
         await unitOfWork.SaveAsync();
@@ -61,7 +61,7 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
     public async ValueTask<Ad> GetByIdAsync(long id)
     {
         var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == id)
-            ?? throw new NotFoundException($"Ad is not found with this ID={id}");
+            ?? throw new NotFoundException($"Ad is not found with this ID= {id}!");
 
         await adViewService.IncrementViewCountAsync(existAd.Id);
 

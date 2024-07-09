@@ -1,9 +1,8 @@
-﻿namespace Partify.WebApi.Models.Assets
+﻿namespace Partify.WebApi.Models.Assets;
+
+public class AssetViewModel
 {
-	public class AssetViewModel
-	{
-		public long Id { get; set; }
-		public string FileName { get; set; }
-		public string FilePath { get; set; }
-	}
+	public long Id { get; set; }
+	public string FileName { get; set; }
+	public string FilePath { get; set; }
 }
