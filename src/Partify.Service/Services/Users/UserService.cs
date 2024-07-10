@@ -96,4 +96,11 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
 
 		return existUser;
 	}
+
+    public async ValueTask<IEnumerable<User>> GetAllAsync()
+    {
+		return await unitOfWork.UserRepository
+			.Select(isTracking: false, includes: ["Role"])
+			.ToListAsync();
+    }
 }

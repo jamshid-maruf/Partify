@@ -9,6 +9,7 @@ public interface IUserService
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<User> GetAsync(long id);
 	ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
+	ValueTask<IEnumerable<User>> GetAllAsync();
 	ValueTask<User> ChangePasswordAsync(string oldPasword, string newPassword, string confirmPassword);
 	ValueTask<User> ChangeRoleAsync(long userId, long roleId);
 }

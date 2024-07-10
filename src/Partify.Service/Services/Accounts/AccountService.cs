@@ -31,7 +31,7 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 		user.RoleId = roleWhichIsUser.Id;
 		user.Password = PasswordHasher.Hash(user.Password);
 		var json = JsonConvert.SerializeObject(user);
-		CacheSet($"registerKey-{user.Phone}", json);
+		CacheSet($"registerKey-{user.Email}", json);
 
 		await EmailHelper.SendCodeAsync(memoryCache, user.Email, $"registerCodeKey-{user.Email}");
 	}
