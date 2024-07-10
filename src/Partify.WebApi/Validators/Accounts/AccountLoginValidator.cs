@@ -10,11 +10,11 @@ public class AccountLoginValidator : AbstractValidator<(long phone, string passw
 		RuleFor(model => model.phone)
 			.NotNull()
 			.Must(ValidationHelper.IsValidPhoneNumber)
-			.WithMessage(model => $"{nameof(model.phone)} is not valid");
+			.WithMessage("Phone is not valid");
 
 		RuleFor(model => model.password)
 			.NotNull()
 			.Must(ValidationHelper.IsHardPassword)
-			.WithMessage(model => $"{nameof(model.password)} is not valid");
+			.WithMessage("Password is not valid, password must be hard!");
 	}
 }

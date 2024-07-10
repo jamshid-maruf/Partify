@@ -10,11 +10,11 @@ public class AccountVerifyValidator : AbstractValidator<(string email, string co
 		RuleFor(model => model.email)
 			.NotNull()
 			.Must(ValidationHelper.IsValidEmail)
-			.WithMessage(model => $"{nameof(model.email)} is not valid");
+			.WithMessage("Email is not valid");
 
 		RuleFor(model => model.code)
 			.NotNull()
 			.Must(model => model.Length == 5)
-			.WithMessage(model => $"{nameof(model.code)} is not valid");
+			.WithMessage("Code is not valid");
 	}
 }

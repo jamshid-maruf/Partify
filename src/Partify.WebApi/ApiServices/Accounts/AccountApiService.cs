@@ -35,20 +35,14 @@ public class AccountApiService(
 
 	public async ValueTask<UserViewModel> CreateAsync(string email)
 	{
-		var validatorResult = await createValidator.ValidateAsync(email);
-		if (validatorResult.Errors.Any())
-			throw new ArgumentIsNotValidException(validatorResult.Errors.FirstOrDefault().ErrorMessage);
-
+		await createValidator.EnsureValidatedAsync(email);
 		var result = await accountService.CreateAsync(email);
 		return mapper.Map<UserViewModel>(result);
 	}
 
 	public async ValueTask<LoginViewModel> LoginAsync(long phone, string password)
 	{
-		var validatorResult = await loginValidator.ValidateAsync((phone, password));
-		if (validatorResult.Errors.Any())
-			throw new ArgumentIsNotValidException(validatorResult.Errors.FirstOrDefault().ErrorMessage);
-
+		await loginValidator.EnsureValidatedAsync(phone, password);
 		var result = await accountService.LoginAsync(phone, password);
 		var rolePermissions = await userRolePermissionService.GetAlByRoleIdAsync(result.user.RoleId);
 		var mappedResult = mapper.Map<LoginViewModel>(result.user);
@@ -66,19 +60,13 @@ public class AccountApiService(
 
 	public async ValueTask<bool> VerifyAsync(string email, string code)
 	{
-		var result = await verifyValidator.ValidateAsync((email, code));
-		if (result.Errors.Any())
-			throw new ArgumentIsNotValidException(result.Errors.FirstOrDefault().ErrorMessage);
-
+		await verifyValidator.EnsureValidatedAsync(email, code);
 		return await accountService.VerifyAsync(email, code);
 	}
 
 	public async ValueTask<UserViewModel> ResetPasswordAsync(string email, string newPassword)
 	{
-		var validatorResult = await resetPasswordValidator.ValidateAsync((email, newPassword));
-		if (validatorResult.Errors.Any())
-			throw new ArgumentIsNotValidException(validatorResult.Errors.FirstOrDefault().ErrorMessage);
-
+		await resetPasswordValidator.EnsureValidatedAsync(email, newPassword);
 		var result = await accountService.ResetPasswordAsync(email, newPassword);
 		return mapper.Map<UserViewModel>(result);
 	}

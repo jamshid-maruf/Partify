@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Partify.Tests", "test\Parti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Partify.WebApi", "src\Partify.WebApi\Partify.WebApi.csproj", "{E39B1BB6-A8FC-4420-A0E0-8F80FC2CA6C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Partify.Web", "src\Partify.Web\Partify.Web.csproj", "{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{E39B1BB6-A8FC-4420-A0E0-8F80FC2CA6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E39B1BB6-A8FC-4420-A0E0-8F80FC2CA6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E39B1BB6-A8FC-4420-A0E0-8F80FC2CA6C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{31421DB1-E89A-4E9B-A88B-FC5F94F7C080} = {FDAD2152-3B53-4CD4-A5F1-850A3ACC5ED0}
 		{83400CE5-7B45-4804-8DDB-928318B3EE4E} = {EF74510A-9646-4174-B6B0-27B4F1E6A5A8}
 		{E39B1BB6-A8FC-4420-A0E0-8F80FC2CA6C7} = {FDAD2152-3B53-4CD4-A5F1-850A3ACC5ED0}
+		{4C3A65E5-FEA3-4F54-9404-5FD4EB0ECF04} = {FDAD2152-3B53-4CD4-A5F1-850A3ACC5ED0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E130AB84-B9E0-444E-8FB3-04413BF42716}

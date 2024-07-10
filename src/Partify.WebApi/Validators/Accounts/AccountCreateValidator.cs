@@ -10,6 +10,6 @@ public class AccountCreateValidator : AbstractValidator<string>
 		RuleFor(model => model)
 			.NotNull()
 			.Must(ValidationHelper.IsValidEmail)
-			.WithMessage(model => $"{nameof(model)} is not valid");
+			.WithMessage("Email is not valid");
 	}
 }

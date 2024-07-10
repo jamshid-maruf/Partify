@@ -10,11 +10,11 @@ public class AccountResetPasswordValidator : AbstractValidator<(string email, st
 		RuleFor(model => model.email)
 			.NotNull()
 			.Must(ValidationHelper.IsValidEmail)
-			.WithMessage(model => $"{nameof(model.email)} is not valid");
+			.WithMessage("Email is not valid");
 
 		RuleFor(model => model.newPassword)
 			.NotNull()
 			.Must(ValidationHelper.IsHardPassword)
-			.WithMessage(model => $"{nameof(model.newPassword)} is not valid");
+			.WithMessage("Password is not valid, password must be hard!");
 	}
 }
