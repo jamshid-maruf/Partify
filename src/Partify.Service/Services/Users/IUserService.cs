@@ -5,8 +5,9 @@ namespace Partify.Service.Services.Users;
 
 public interface IUserService
 {
+	ValueTask<User> CreateAsync(User user);
 	ValueTask<User> ModifyAsync(long id, User user);
-	ValueTask<bool> DeleteAsync(long id);
+    ValueTask<bool> DeleteAsync(long id);
 	ValueTask<User> GetAsync(long id);
 	ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
 	ValueTask<IEnumerable<User>> GetAllAsync();

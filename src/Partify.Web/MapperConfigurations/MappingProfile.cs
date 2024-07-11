@@ -13,6 +13,7 @@ public class MappingProfile : Profile
     {
         CreateMap<UserRegisterModel, User>();
         CreateMap<UserUpdateModel, User>();
+        CreateMap<UserCreateModel, User>();
         CreateMap<User, UserViewModel>();
         CreateMap<UserRegisterModel, User>();
         CreateMap<User, LoginViewModel>();

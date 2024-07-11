@@ -7,6 +7,13 @@ namespace Partify.Web.WebServices.Users;
 
 public class UserWebService(IUserService userService, IMapper mapper) : IUserWebService
 {
+    public async ValueTask<UserViewModel> CreateAsync(UserCreateModel createModel)
+    {
+        var mappedUser = mapper.Map<User>(createModel);
+        var updatedUser = await userService.CreateAsync(mappedUser);
+        return mapper.Map<UserViewModel>(updatedUser);
+    }
+
     public async ValueTask<UserViewModel> ModifyAsync(long id, UserUpdateModel updateModel)
     {
         var mappedUser = mapper.Map<User>(updateModel);

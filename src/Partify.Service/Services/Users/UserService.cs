@@ -10,7 +10,28 @@ namespace Partify.Service.Services.Users;
 
 public class UserService(IUnitOfWork unitOfWork) : IUserService
 {
-	public async ValueTask<User> ModifyAsync(long id, User user)
+    public async ValueTask<User> CreateAsync(User user)
+    {
+        var existUser = await unitOfWork.UserRepository.SelectAsync(u => u.Phone == user.Phone && u.Email == user.Email);
+        if (existUser?.Phone is not null)
+        {
+            throw new AlreadyExistException($"This user is already exist with this phone | Phone={user.Phone}");
+        }
+        else if (existUser?.Email is not null)
+        {
+            throw new AlreadyExistException($"This user is already exist with this email | Email={user.Email}");
+        }
+        else if (existUser?.Phone is not null && existUser?.Email is not null)
+        {
+            throw new AlreadyExistException($"This user is already exist with this email and phone | Email={user.Email} & Phone={existUser.Phone}");
+        }
+
+		var createdUser = await unitOfWork.UserRepository.InsertAsync(user);
+		await unitOfWork.SaveAsync();
+		return createdUser;
+    }
+
+    public async ValueTask<User> ModifyAsync(long id, User user)
 	{
 		var exsitUser = await unitOfWork.UserRepository.SelectAsync(user => user.Id == id)
 			?? throw new NotFoundException("This user is not found");

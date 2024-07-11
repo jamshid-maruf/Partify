@@ -1,9 +1,11 @@
-﻿using Partify.Web.Models.Users;
+﻿using Partify.Domain.Entities.Users;
+using Partify.Web.Models.Users;
 
 namespace Partify.Web.WebServices.Users;
 
 public interface IUserWebService
 {
+    ValueTask<UserViewModel> CreateAsync(UserCreateModel createModel);
     ValueTask<UserViewModel> ModifyAsync(long id, UserUpdateModel updateModel);
     ValueTask<bool> DeleteAsync(long id);
     ValueTask<UserViewModel> GetAsync(long id);
