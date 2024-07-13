@@ -1,5 +1,4 @@
-﻿using Partify.Domain.Entities.Users;
-using Partify.Web.Models.Users;
+﻿using Partify.Web.Models.Users;
 
 namespace Partify.Web.WebServices.Users;
 
