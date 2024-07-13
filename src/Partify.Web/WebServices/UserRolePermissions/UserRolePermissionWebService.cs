@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
+using Partify.Domain.Entities.Users;
 using Partify.Service.Services.UserRolePermissions;
 using Partify.Web.Models.UserRolePermissions;
 
 
 namespace Partify.Web.WebServices.UserRolePermissions;
 
-public class UserRolePermission(
-    IUserRolePermissionService userRolePermissionService, IMapper mapper) : IUserRolePermission
+public class UserRolePermissionWebService(IUserRolePermissionService userRolePermissionService, IMapper mapper) : IUserRolePermissionWebService
 {
     public async ValueTask<UserRolePermissionViewModel> CreateAsync(UserRolePermissionCreateModel createModel)
     {

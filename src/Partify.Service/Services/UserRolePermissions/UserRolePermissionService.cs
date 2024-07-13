@@ -72,7 +72,12 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 		return await pagedUserRoles.ToListAsync();
 	}
 
-	public async ValueTask<UserRolePermission> GetByIdAsync(long id)
+    public async ValueTask<IEnumerable<UserRolePermission>> GetAllAsync()
+    {
+		return await unitOfWork.UserRolePermissionRepository.Select().ToListAsync();
+    }
+
+    public async ValueTask<UserRolePermission> GetByIdAsync(long id)
 	{
 		var existUserRolePermission = await unitOfWork.UserRolePermissionRepository
 			.SelectAsync(expression: urp => urp.Id == id, includes: ["UserRole", "Permission"])

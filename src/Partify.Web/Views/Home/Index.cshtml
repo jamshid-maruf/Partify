@@ -2,34 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <div class="video-background">
-        <iframe src="https://www.youtube.com/embed/LPzQPY1l7Ys" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div style="margin-left:10%;">
+    <div class="card">
+        <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/LPzQPY1l7Ys"
+                    title="YouTube video"
+                    style="border-radius:4px"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
     </div>
 </div>
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    .video-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        z-index: -1;
-        overflow: hidden;
-    }
-
-        .video-background iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 177.78vh; /* 100 * (16/9) */
-            height: 100vh;
-            transform: translate(-50%, -50%);
-        }
- </style>

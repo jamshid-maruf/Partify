@@ -3,7 +3,7 @@ using Partify.Web.Models.UserRolePermissions;
 
 namespace Partify.Web.WebServices.UserRolePermissions;
 
-public interface IUserRolePermission
+public interface IUserRolePermissionWebService
 {
     ValueTask<UserRolePermissionViewModel> CreateAsync(UserRolePermissionCreateModel createModel);
     ValueTask<UserRolePermissionViewModel> UpdateAsync(long id, UserRolePermissionUpdateModel updateModel);
