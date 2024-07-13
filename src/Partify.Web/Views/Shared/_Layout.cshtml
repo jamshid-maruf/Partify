@@ -11,21 +11,35 @@
 </head>
 <body>
     <div class="sidebar">
-        <h4 class="text-center text-white mb-4"><i ></i>Partify</h4>
-        <a asp-controller="Users" asp-action="Index" class="active"><i class="fas fa-home"></i> User</a>
+        <h4 class="text-center text-white mb-4">Partify</h4>
+        <a class="active" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> User</a>
+        <ul class="collapse list-unstyled" id="userSubmenu">
+            <li>
+                <a asp-controller="Users" asp-action="Index" class="pl-4" style="margin-left:30px">Users</a>
+            </li>
+            <li>
+                <a asp-controller="UserRoles" asp-action="Index" class="pl-4" style="margin-left:30px">User Roles</a>
+            </li>
+            <li>
+                <a asp-controller="Permissions" asp-action="Index" class="pl-4" style="margin-left:30px">Permissions</a>
+            </li>
+            <li>
+                <a asp-controller="UserRolePermissions" asp-action="Index" class="pl-4" style="margin-left:30px">User Role Permissions</a>
+            </li>
+        </ul>
         <a asp-controller="Users" asp-action="Index"><i class="fas fa-tachometer-alt"></i> User Role</a>
         <a asp-controller="Users" asp-action="Index"><i class="fas fa-th-large"></i> Permission</a>
         <a asp-controller="Users" asp-action="Index"><i class="fas fa-box"></i> Role Permission</a>
         <a asp-controller="Users" asp-action="Index"><i class="fas fa-users"></i> Customers</a>
     </div>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="content container justify-content-center" id="main-content">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
     <script src="~/lib/mdb5/js/mdb.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
@@ -61,3 +75,21 @@
         padding: 20px;
     }
 </style>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('main-content');
+        sidebar.classList.toggle('open');
+        content.classList.toggle('shifted');
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="collapse"]').on('click', function () {
+            var $el = $(this);
+            var $target = $($el.attr('href'));
+            $target.collapse('toggle');
+            return false;
+        });
+    });
+</script>

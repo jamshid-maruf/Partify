@@ -29,14 +29,28 @@ public class UsersController(IUserWebService userWebService) : Controller
         return View();
     }
 
-    public IActionResult Edit()
+    public async ValueTask<IActionResult> Edit(long id)
     {
-        return View();
+        var result = await userWebService.GetAsync(id);
+        return View(result);
     }
 
     [HttpPost]
-    public async ValueTask<IActionResult> Edit(UserUpdateModel createModel)
+    public async ValueTask<IActionResult> Edit(long id, UserUpdateModel createModel)
     {
+        var result = await userWebService.ModifyAsync(id, createModel);
+        if (result is not null)
+            return RedirectToAction("Index");
+
+        return View();
+    }
+
+    public async ValueTask<IActionResult> Delete(long id)
+    {
+        var result = await userWebService.DeleteAsync(id);
+        if(result)
+            return RedirectToAction("Index");
+
         return View();
     }
 }

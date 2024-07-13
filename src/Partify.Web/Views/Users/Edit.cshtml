@@ -1,0 +1,33 @@
+﻿@using Partify.Web.Models.Users
+@model UserViewModel
+
+<div class="container mt-5">
+    <form asp-controller="Users" method="post" asp-action="Edit">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>User create</h1>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <input type="text" asp-for="FirstName" class="form-control" />
+                    <label class="form-label" asp-for="FirstName"></label>
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <input type="text" asp-for="LastName" class="form-control" />
+                    <label class="form-label" asp-for="LastName"></label>
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <input type="email" asp-for="Email" class="form-control" />
+                    <label class="form-label" asp-for="Email"></label>
+                </div>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <input type="tel" asp-for="Phone" class="form-control" />
+                    <label class="form-label" asp-for="Phone"></label>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</div>
