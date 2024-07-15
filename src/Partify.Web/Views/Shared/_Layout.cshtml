@@ -11,41 +11,43 @@
 </head>
 <body>
     <div class="col-4">
-        <div class="sidebar button-container">
+        <div class="sidebar">
             <img src="~/images/logo.png" style="margin-top:-30px; margin-bottom:-20px; margin-left:30px; height:21%"/>
-            <a class="button active" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
-            <a class="button" asp-controller="Ads" asp-action="Index"><i class="fa-solid fa-layer-group"></i>Ads</a>
-            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle button"><i class="fas fa-users"></i> User</a>
-            <ul class="collapse list-unstyled" id="userSubmenu">
-                <li>
-                    <a class="button" asp-controller="Users" asp-action="Index" class="pl-4" style="margin-left:30px">Users</a>
-                </li>
-                <li>
-                    <a class="button" asp-controller="UserRoles" asp-action="Index" class="pl-4" style="margin-left:30px">User Roles</a>
-                </li>
-                <li>
-                    <a class="button" asp-controller="Permissions" asp-action="Index" class="pl-4" style="margin-left:30px">Permissions</a>
-                </li>
-                <li>
-                    <a class="button" asp-controller="UserRolePermissions" asp-action="Index" class="pl-4" style="margin-left:30px">User Role Permissions</a>
-                </li>
-            </ul>
+            <a class="active" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Home</a>
+            <a  asp-controller="Ads" asp-action="Index"><i class="fa-solid fa-layer-group"></i>Ads</a>
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> User</a>
+                <ul class="collapse list-unstyled" id="userSubmenu">
+                    <li>
+                        <a class="inner" asp-controller="Users" asp-action="Index" class="pl-4" style="margin-left:30px">Users</a>
+                    </li>
+                    <li>
+                        <a class="inner" asp-controller="UserRoles" asp-action="Index" class="pl-4" style="margin-left:30px">User Roles</a>
+                    </li>
+                    <li>
+                        <a class="inner" asp-controller="Permissions" asp-action="Index" class="pl-4" style="margin-left:30px">Permissions</a>
+                    </li>
+                    <li>
+                        <a class="inner" asp-controller="UserRolePermissions" asp-action="Index" class="pl-4" style="margin-left:30px">User Role Permissions</a>
+                    </li>
+                </ul>
             <a href="#settingmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-gears"></i>Settings</a>
             <ul class="collapse list-unstyled" id="settingmenu">
                 <li>
-                    <a class="button" asp-controller="Ads" asp-action="Index" class="pl-4" style="margin-left:30px">Ad Categories</a>
+                    <a asp-controller="Ads" asp-action="Index" class="pl-4" style="margin-left:30px">Ad Categories</a>
                 </li>
                 <li>
-                    <a class="button" asp-controller="Ads" asp-action="Index" class="pl-4" style="margin-left:30px">Facilities</a>
+                    <a  asp-controller="Ads" asp-action="Index" class="pl-4" style="margin-left:30px">Facilities</a>
                 </li>
             </ul>
         </div>
+
+
     </div>
     <div class="col-8">
         <div class="content container justify-content-center" id="main-content">
             <main role="main">
                 @RenderBody()
-            </main>
+            </main> 
         </div>
     </div>
    
@@ -64,21 +66,21 @@
         padding-top: 20px;
     }
 
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-            margin: 5px 0;
-        }
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        display: block;
+        margin: 5px 0;
+    }
 
-            .sidebar a:hover, .sidebar a.active {
-                background-color: #007bff;
-            }
+    .sidebar a:hover, .sidebar a.active {
+        background-color: #007bff;
+    }
 
-            .sidebar a i {
-                margin-right: 10px;
-            }
+    .sidebar a i {
+        margin-right: 10px;
+     }
 
     .content {
         margin-left: 250px;
@@ -103,9 +105,20 @@
         });
     });
 
-    const buttonContainer = document.querySelector('.button-container');
+        document.addEventListener("DOMContentLoaded", function () {
+        var links = document.querySelectorAll(".sidebar a");
 
-    buttonContainer.addEventListener('click', function (event) {
-        event.currentTarget.classList.toggle('active');
-    });
+            links.forEach(function (link) {
+                link.addEventListener("click", function (event) {
+                    
+                    links.forEach(function (link) {
+                        link.classList.remove("active");
+                    });
+                    this.classList.add("active");
+                });
+            });
+        });
+
+
+
 </script>
