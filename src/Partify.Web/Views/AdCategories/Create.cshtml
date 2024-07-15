@@ -1,0 +1,18 @@
+﻿@using Partify.Web.Models.AdCategories
+@model AdCategoryCreateModel
+
+<div class="container mt-5">
+    <form asp-controller="AdCategories" method="post" asp-action="Create">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Ad Category Create</h1>
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <label class="form-label" asp-for="Name"></label>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">CREATE</button>
+            </div>
+        </div>
+    </form>
+</div>
