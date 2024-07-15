@@ -13,6 +13,7 @@ using Partify.Service.Services.Permissions;
 using Partify.Service.Services.UserRolePermissions;
 using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
+using Partify.Web.WebServices.UserRoles;
 using Partify.Web.WebServices.Users;
 
 namespace Partify.Web.Extensions;
@@ -23,10 +24,13 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IUserRoleService, UserRoleService>();
+        services.AddScoped<IAdCategoryService, AdCategoryService>();
     }
 
     public static void AddWebServices(this IServiceCollection services)
     {
         services.AddScoped<IUserWebService, UserWebService>();
+        services.AddScoped<IUserRoleWebService, UserRoleWebService>();
     }
 }
