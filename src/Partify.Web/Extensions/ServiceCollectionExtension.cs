@@ -19,7 +19,7 @@ namespace Partify.Web.Extensions;
 
 public static class ServiceCollectionExtension
 {
-    public static void AddServices(this IServiceCollection services)
+    public static void AddServices(this IServiceCollection  services)
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();

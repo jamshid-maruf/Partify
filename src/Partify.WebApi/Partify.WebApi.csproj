@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Partify.DataAccess\Partify.DataAccess.csproj" />
+    <ProjectReference Include="..\Partify.Domain\Partify.Domain.csproj" />
     <ProjectReference Include="..\Partify.Service\Partify.Service.csproj" />
   </ItemGroup>
 
