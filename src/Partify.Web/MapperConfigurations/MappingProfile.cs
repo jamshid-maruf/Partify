@@ -3,7 +3,9 @@ using Partify.Domain.Entities.Users;
 using Partify.Web.Models.UserRoles;
 using Partify.Web.Models.Users;
 using Partify.Web.Models.UserRolePermissions;
-using Partify.Web.Models.Permissions;
+using Partify.Web.Models.AdCategories;
+using Partify.Domain.Entities.Ads;
+
 
 namespace Partify.Web.MapperConfigurations;
 
@@ -55,8 +57,8 @@ public class MappingProfile : Profile
         //CreateMap<FacilityUpdateModel, Facility>();
         //CreateMap<Facility, FacilityViewModel>();
 
-        //CreateMap<AdCategoryCreateModel, AdCategory>();
-        //CreateMap<AdCategoryUpdateModel, AdCategory>();
-        //CreateMap<AdCategory, AdCategoryViewModel>();
+        CreateMap<AdCategoryCreateModel, AdCategory>();
+        CreateMap<AdCategoryUpdateModel, AdCategory>();
+        CreateMap<AdCategory, AdCategoryViewModel>();
     }
 }
