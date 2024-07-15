@@ -1,0 +1,35 @@
+﻿@using Partify.Domain.Entities.Users
+@model IEnumerable<UserRolePermission>
+
+@{
+    ViewData["Title"] = "User Role Permissions";
+}
+
+<h2>User Role Permissions</h2>
+
+<p>
+    <a asp-controller="UserRolePermissions" asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Role</th>
+            <th>Permission</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserRole.Name</td>
+                @* <td>@item.Permission.Name</td> *@
+                <td>
+                    <a asp-controller="UserRolePermissions" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-controller="UserRolePermissions" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
