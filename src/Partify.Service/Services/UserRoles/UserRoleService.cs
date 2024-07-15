@@ -57,8 +57,12 @@ public class UserRoleService(IUnitOfWork unitOfWork) : IUserRoleService
         var pagedUserRoles = userRoles.ToPaginateAsQueryable(@params);
         return await pagedUserRoles.ToListAsync();
     }
+    public async ValueTask<IEnumerable<UserRole>> GetAllAsync()
+    {
+       return await unitOfWork.UserRoleRepository.Select().ToListAsync();
+    }
 
-	public async ValueTask<UserRole> GetByIdAsync(long id)
+    public async ValueTask<UserRole> GetByIdAsync(long id)
 	{
         var existUserRole = await unitOfWork.UserRoleRepository.SelectAsync(uRole => uRole.Id == id)
             ?? throw new NotFoundException($"This user role is not found with this ID={id}");

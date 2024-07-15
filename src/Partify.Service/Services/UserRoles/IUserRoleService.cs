@@ -11,4 +11,5 @@ public interface IUserRoleService
 	ValueTask<UserRole> GetByIdAsync(long id);
 	ValueTask<UserRole> GetByNameAsync(string name);
 	ValueTask<IEnumerable<UserRole>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
+    ValueTask<IEnumerable<UserRole>> GetAllAsync();
 }
