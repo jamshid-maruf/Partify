@@ -43,6 +43,10 @@ public class AdCategoryService(IUnitOfWork unitOfWork) : IAdCategoryService
         var pagedAdCategories = adCategories.ToPaginateAsQueryable(@params);
         return await pagedAdCategories.ToListAsync();
     }
+    public async ValueTask<IEnumerable<AdCategory>> GetAllAsync()
+    {
+        return await unitOfWork.AdCategoryRepository.Select().ToListAsync();
+    }
 
     public async ValueTask<AdCategory> GetByIdAsync(long id)
     {
