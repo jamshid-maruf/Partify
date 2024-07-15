@@ -1,0 +1,63 @@
+﻿@using Partify.Web.Models.Permissions
+@model IEnumerable<PermissionViewModel>
+
+<h2>Permissions</h2>
+
+<a asp-controller="Permissions" asp-action="Create" class="btn btn-primary">Create New</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Controller</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Controller</td>
+                <td>@item.Action</td>
+                <td>
+                    <a class="btn btn-info btn-rounded" asp-controller="Permissions" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-danger btn-rounded" data-mdb-toggle="modal" data-mdb-target="#showDeletePage" data-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+    </tbody>
+    
+    
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="showDeletePage" tabindex="-1" aria-labelledby="showDeletePage" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a id="confirmDeleteBtn" asp-controller="Permissions" asp-action="Delete" asp-route-id="" class="btn btn-danger" data-mdb-ripple-init>Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteLinks = document.querySelectorAll('a[data-mdb-toggle="modal"][data-mdb-target="#showDeletePage"]');
+        var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                var reporterId = link.getAttribute('data-id');
+                var confirmDeleteUrl = '/Permissions/Delete/' + reporterId;
+                confirmDeleteBtn.setAttribute('href', confirmDeleteUrl);
+            });
+        });
+    });
+</script>

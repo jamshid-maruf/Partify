@@ -72,4 +72,9 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 		var pagedPemissions = permissions.ToPaginateAsQueryable(@params);
 		return await pagedPemissions.ToListAsync();
 	}
+
+    public async ValueTask<IEnumerable<Permission>> GetAllAsync()
+    {
+		return await unitOfWork.PermissionRepository.Select().ToListAsync();
+    }
 }

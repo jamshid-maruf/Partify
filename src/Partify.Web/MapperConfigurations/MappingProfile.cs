@@ -6,6 +6,7 @@ using Partify.Web.Models.UserRolePermissions;
 using Partify.Web.Models.AdCategories;
 using Partify.Domain.Entities.Ads;
 
+
 namespace Partify.Web.MapperConfigurations;
 
 public class MappingProfile : Profile
@@ -27,6 +28,10 @@ public class MappingProfile : Profile
         CreateMap<UserRolePermissionUpdateModel, UserRolePermission>();
         CreateMap<UserRolePermission, UserRolePermissionViewModel>();
 
+        CreateMap<PermissionCreateModel, Permission>();
+        CreateMap<PermissionUpdateModel, Permission>();
+        CreateMap<Permission, PermissionViewModel>();
+
         //CreateMap<AdImage, AdImageCreateModel>().ReverseMap();
         //CreateMap<AdImage, AdImageViewModel>().ReverseMap();
 
@@ -38,9 +43,7 @@ public class MappingProfile : Profile
 
         //CreateMap<AdView, AdViewViewModel>().ReverseMap();
 
-        //CreateMap<PermissionCreateModel, Permission>();
-        //CreateMap<PermissionUpdateModel, Permission>();
-        //CreateMap<Permission, PermissionViewModel>();
+
 
         //CreateMap<AdCommentCreateModel, AdComment>();
         //CreateMap<AdCommentUpdateModel, AdComment>();
