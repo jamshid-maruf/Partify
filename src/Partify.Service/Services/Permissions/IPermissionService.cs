@@ -10,4 +10,6 @@ public interface IPermissionService
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<Permission> GetByIdAsync(long id);
 	ValueTask<IEnumerable<Permission>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
+    ValueTask<IEnumerable<Permission>> GetAllAsync();
+
 }

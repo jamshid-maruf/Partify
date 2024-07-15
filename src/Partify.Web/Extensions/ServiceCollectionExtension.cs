@@ -13,6 +13,7 @@ using Partify.Service.Services.Permissions;
 using Partify.Service.Services.UserRolePermissions;
 using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
+using Partify.Web.WebServices.Permissions;
 using Partify.Web.WebServices.UserRolePermissions;
 using Partify.Web.WebServices.UserRoles;
 using Partify.Web.WebServices.Users;
@@ -28,6 +29,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<IUserRoleService, UserRoleService>();
         services.AddScoped<IAdCategoryService, AdCategoryService>();
         services.AddScoped<IUserRolePermissionService, UserRolePermissionService>();
+        services.AddScoped<IPermissionService, PermissionService>();
     }
 
     public static void AddWebServices(this IServiceCollection services)
@@ -35,5 +37,6 @@ public static class ServiceCollectionExtension
         services.AddScoped<IUserWebService, UserWebService>();
         services.AddScoped<IUserRoleWebService, UserRoleWebService>();
         services.AddScoped<IUserRolePermissionWebService, UserRolePermissionWebService>();
+        services.AddScoped<IPermissionWebService, PermissionWebService>();
     }
 }
