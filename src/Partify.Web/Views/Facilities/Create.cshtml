@@ -1,0 +1,26 @@
+﻿@using Partify.Web.Models.Facilities
+@model FacilityCreateModel
+
+<div class="container mt-5">
+    <form asp-controller="Facilities" method="post" asp-action="Create" enctype="multipart/form-data">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Facility Create</h1>
+
+                <div class="form-outline mb-4">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <label class="form-label" asp-for="Name">Name</label>
+                </div>
+
+                <div class="form-control-plaintext mb-4">
+                    <span asp-validation-for="Icon" class="text-danger"></span>
+                    <label class="form-label" asp-for="Icon">Icon</label>
+                    <input type="file" asp-for="Icon" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block">CREATE</button>
+            </div>
+        </div>
+    </form>
+</div>

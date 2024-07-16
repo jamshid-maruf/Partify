@@ -6,7 +6,7 @@ namespace Partify.Web.Controllers;
 
 public class FacilitiesController(IFacilityWebService facilityWebService) : Controller
 {
-    public async Task<IActionResult> Index()
+    public async ValueTask<IActionResult> Index()
     {
         var facilities = await facilityWebService.GetAllAsync();
         return View(facilities);
@@ -19,7 +19,7 @@ public class FacilitiesController(IFacilityWebService facilityWebService) : Cont
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(FacilityCreateModel createModel)
+    public async ValueTask<IActionResult> Create(FacilityCreateModel createModel)
     {
         var result = await facilityWebService.CreateAsync(createModel);
         if (result is not null)
@@ -28,31 +28,28 @@ public class FacilitiesController(IFacilityWebService facilityWebService) : Cont
         return View();
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Edit(long id)
+    public async ValueTask<IActionResult> Edit(long id)
     {
-        var facility = await facilityWebService.GetByIdAsync(id);
-        if (facility == null)
-        {
-            return NotFound();
-        }
-        return View(facility);
+        var result = await facilityWebService.GetByIdAsync(id);
+        return View(result);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(long id, FacilityUpdateModel updateModel)
+    public async ValueTask<IActionResult> Edit(long id, FacilityUpdateModel updateModel)
     {
-        if (ModelState.IsValid)
-        {
-            await facilityWebService.UpdateAsync(id, updateModel);
-            return RedirectToAction(nameof(Index));
-        }
-        return View(updateModel);
+        var result = await facilityWebService.UpdateAsync(id, updateModel);
+        if (result is not null)
+            return RedirectToAction("Index");
+
+        return View();
     }
 
-    public async Task<IActionResult> Delete(long id)
+    public async ValueTask<IActionResult> Delete(long id)
     {
-        await facilityWebService.DeleteAsync(id);
-        return RedirectToAction(nameof(Index));
+        var result = await facilityWebService.DeleteAsync(id);
+        if (result)
+            return RedirectToAction("Index");
+
+        return View();
     }
 }

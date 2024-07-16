@@ -1,0 +1,67 @@
+﻿@using Partify.Web.Models.Facilities
+@model IEnumerable<FacilityViewModel>
+
+@{
+    ViewData["Title"] = "Facilities";
+}
+
+<div class="container ml-8">
+    <div class="mb-3">
+        <a asp-controller="Facilities" asp-action="Create" class="btn btn-success btn-rounded" data-mdb-ripple-init>Create</a>
+    </div>
+
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Icon</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var facility in Model)
+            {
+                <tr>
+                    <td>@facility.Id</td>
+                    <td>@facility.Name</td>
+                    <td><img src="@facility.Icon" alt="Icon" style="max-width: 50px;" /></td>
+                    <td class="d-flex justify-content-start align-items-center">
+                        <a asp-controller="Facilities" asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-info btn-sm btn-rounded me-2" data-mdb-ripple-init>Edit</a>
+                        <a class="btn btn-danger btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#showDeletePage" data-id="@facility.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="showDeletePage" tabindex="-1" aria-labelledby="showDeletePage" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a id="confirmDeleteBtn" asp-controller="Facilities" asp-action="Delete" asp-route-id="" class="btn btn-danger" data-mdb-ripple-init>Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var deleteLinks = document.querySelectorAll('a[data-mdb-toggle="modal"][data-mdb-target="#showDeletePage"]');
+        var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+        deleteLinks.forEach(function (link) {
+            link.addEventListener('click', function () {
+                var reporterId = link.getAttribute('data-id');
+                var confirmDeleteUrl = '/Facilities/Delete/' + reporterId;
+                confirmDeleteBtn.setAttribute('href', confirmDeleteUrl);
+            });
+        });
+    });
+</script>
