@@ -15,7 +15,8 @@
     <thead>
         <tr>
             <th>User Role</th>
-            <th>Permission</th>
+            <th>Controller</th>
+            <th>Action</th>
             <th></th>
         </tr>
     </thead>
@@ -24,7 +25,8 @@
         {
             <tr>
                 <td>@item.UserRole.Name</td>
-                @* <td>@item.Permission.Name</td> *@
+                <td>@item.Permission.Controller</td>
+                <td>@item.Permission.Action</td>
                 <td>
                     <a asp-controller="UserRolePermissions" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
                     <a asp-controller="UserRolePermissions" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>

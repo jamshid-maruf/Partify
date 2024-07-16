@@ -5,6 +5,7 @@ using Partify.Web.Models.Users;
 using Partify.Web.Models.UserRolePermissions;
 using Partify.Web.Models.AdCategories;
 using Partify.Domain.Entities.Ads;
+using Partify.Web.Models.Permissions;
 
 
 namespace Partify.Web.MapperConfigurations;

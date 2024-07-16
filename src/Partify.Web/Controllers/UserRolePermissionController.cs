@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Partify.Web.Models;
 using Partify.Web.Models.UserRolePermissions;
+using Partify.Web.WebServices.Permissions;
 using Partify.Web.WebServices.UserRolePermissions;
 using Partify.Web.WebServices.UserRoles;
 
@@ -8,7 +9,7 @@ namespace Partify.Web.Controllers
 {
     public class UserRolePermissionsController
         (IUserRolePermissionWebService userRolePermissionWebService,
-        IUserRoleWebService userRoleWebService) : Controller
+        IUserRoleWebService userRoleWebService, IPermissionWebService permissionWebService) : Controller
     {
 
         public async Task<IActionResult> Index()
@@ -21,7 +22,7 @@ namespace Partify.Web.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.UserRoles = await userRoleWebService.GetAllAsync();
-            //ViewBag.Permissions = await permissionWebService.GetAllAsync();
+            ViewBag.Permissions = await permissionWebService.GetAllAsync();
             return View();
         }
 
@@ -38,7 +39,7 @@ namespace Partify.Web.Controllers
             }
 
             ViewBag.UserRoles = await userRoleWebService.GetAllAsync();
-           // ViewBag.Permissions = await permissionWebService.GetAllAsync();
+            ViewBag.Permissions = await permissionWebService.GetAllAsync();
             return View(createModel);
         }
 
@@ -52,7 +53,7 @@ namespace Partify.Web.Controllers
             }
 
             ViewBag.UserRoles = await userRoleWebService.GetAllAsync();
-            //ViewBag.Permissions = await permissionWebService.GetAllAsync();
+            ViewBag.Permissions = await permissionWebService.GetAllAsync();
             return View(userRolePermission);
         }
 
@@ -69,7 +70,7 @@ namespace Partify.Web.Controllers
             }
 
             ViewBag.UserRoles = await userRoleWebService.GetAllAsync();
-           // ViewBag.Permissions = await permissionWebService.GetAllAsync();
+            ViewBag.Permissions = await permissionWebService.GetAllAsync();
             return View(updateModel);
         }
 

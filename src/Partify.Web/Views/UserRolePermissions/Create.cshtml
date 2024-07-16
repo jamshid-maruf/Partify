@@ -8,17 +8,21 @@
 
 <h2>Create User Role Permission</h2>
 
-<form asp-action="Create" method="post">
+<form asp-controller="Permissions" method="post" asp-action="Create">
     <div class="form-group">
         <label asp-for="UserRoleId" class="control-label">User Role</label>
         <select asp-for="UserRoleId" class="form-control" asp-items="@(new SelectList(ViewBag.UserRoles, "Id", "Name"))"></select>
     </div>
     <div class="form-group">
-        @* <label asp-for="PermissionId" class="control-label">Permission</label>
-        <select asp-for="PermissionId" class="form-control" asp-items="@(new SelectList(ViewBag.Permissions, "Id", "Name"))"></select>
- *@    </div>
+        <label asp-for="PermissionId" class="control-label">Permission Controller</label>
+        <select asp-for="PermissionId" class="form-control" asp-items="@(new SelectList(ViewBag.Permissions, "Id", "Controller"))"></select>
+    </div>
     <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <label asp-for="PermissionId" class="control-label">Permission Action</label>
+        <select asp-for="PermissionId" class="form-control" asp-items="@(new SelectList(ViewBag.Permissions, "Id", "Action"))"></select>
+    </div>
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-success btn-block">CREATE</button>
     </div>
 </form>
 
