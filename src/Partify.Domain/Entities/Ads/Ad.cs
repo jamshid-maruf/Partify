@@ -17,7 +17,7 @@ public class Ad : Auditable
 	public Merchant Merchant { get; set; }
 	public long AdCategoryId { get; set; }
 	public AdCategory AdCategory { get; set; }
-	public ICollection<AdPropertyValue> Properties { get; set; }
+	public ICollection<AdCategoryPropertyValue> Properties { get; set; }
 	public ICollection<AdImage> Images { get; set; }
 	public ICollection<AdComment> Comments { get; set; }
 	public ICollection<AdFacility> Facilities { get; set; }

@@ -26,7 +26,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<AdFacility> AdFacilities { get; set; }
 	public DbSet<AdCategory> AdCategories { get; set; }
 	public DbSet<AdCommentFile> AdCommentFiles { get; set; }
-	public DbSet<AdPropertyValue> AdPropertyValues { get; set; }
+	public DbSet<AdCategoryPropertyValue> AdPropertyValues { get; set; }
 	public DbSet<UserRolePermission> UserRolePermissions { get; set; }
 	public DbSet<AdCategoryProperty> AdCategoryProperties { get; set; }
 
@@ -66,7 +66,7 @@ public class ApplicationDbContext : DbContext
 		modelBuilder.Entity<AdFacility>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<FavoriteAd>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<AdCommentFile>().HasQueryFilter(entity => !entity.IsDeleted);
-		modelBuilder.Entity<AdPropertyValue>().HasQueryFilter(entity => !entity.IsDeleted);
+		modelBuilder.Entity<AdCategoryPropertyValue>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<UserRolePermission>().HasQueryFilter(entity => !entity.IsDeleted);
 		modelBuilder.Entity<AdCategoryProperty>().HasQueryFilter(entity => !entity.IsDeleted);
 	}

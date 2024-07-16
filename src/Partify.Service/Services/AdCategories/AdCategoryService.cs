@@ -66,7 +66,7 @@ public class AdCategoryService(IUnitOfWork unitOfWork) : IAdCategoryService
         if (alreadyExistAdCategory is not null)
             throw new AlreadyExistException($"This Ad Category is already exist with this name={adCategory.Name}");
 
-        existAdCategory.Name = existAdCategory.Name;
+        existAdCategory.Name = adCategory.Name;
         var updatedAdCategory = await unitOfWork.AdCategoryRepository.UpdateAsync(existAdCategory);
         await unitOfWork.SaveAsync();
         return updatedAdCategory;

@@ -31,7 +31,7 @@ public static class ServiceCollectionExtension
     {
         services.AddScoped<IUserWebService, UserWebService>();
         services.AddScoped<IUserRoleWebService, UserRoleWebService>();
-        services.AddScoped<IAdCategoryWebService, AdCategoryWebService>();
+        services.AddScoped<IAdCategoryPropertyValueWebService, AdCategoryPropertyValueWebService>();
         services.AddScoped<IUserRolePermissionWebService, UserRolePermissionWebService>();
         services.AddScoped<IPermissionWebService, PermissionWebService>();
         services.AddScoped<IFacilityWebService, FacilityWebService>();

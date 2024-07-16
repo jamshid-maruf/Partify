@@ -3,11 +3,13 @@ using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Facilities;
 using Partify.Domain.Entities.Users;
 using Partify.Web.Models.AdCategories;
+using Partify.Web.Models.AdCategoryPropertyValues;
 using Partify.Web.Models.Facilities;
 using Partify.Web.Models.Permissions;
 using Partify.Web.Models.UserRolePermissions;
 using Partify.Web.Models.UserRoles;
 using Partify.Web.Models.Users;
+using Partify.WebApi.Models.AdCategoryProperties;
 
 
 namespace Partify.Web.MapperConfigurations;
@@ -63,5 +65,9 @@ public class MappingProfile : Profile
         CreateMap<AdCategoryCreateModel, AdCategory>();
         CreateMap<AdCategoryUpdateModel, AdCategory>();
         CreateMap<AdCategory, AdCategoryViewModel>();
+
+        CreateMap<AdCategoryPropertyValueCreateModel, AdCategoryPropertyValue>();
+        CreateMap<AdCategoryPropertyValueUpdateModel, AdCategoryPropertyValue>();
+        CreateMap<AdCategoryPropertyValue, AdCategoryPropertyValueViewModel>();
     }
 }
