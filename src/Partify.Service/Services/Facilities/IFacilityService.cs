@@ -10,4 +10,5 @@ public interface IFacilityService
 	ValueTask<bool> DeleteAsync(long id);
 	ValueTask<Facility> GetByIdAsync(long id);
 	ValueTask<IEnumerable<Facility>> GetAllAsync(PaginationParams @params, Filter filter, string search = null);
+    ValueTask<IEnumerable<Facility>> GetAllAsync();
 }

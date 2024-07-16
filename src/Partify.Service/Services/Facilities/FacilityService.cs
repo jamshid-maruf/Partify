@@ -68,4 +68,9 @@ public class FacilityService(IUnitOfWork unitOfWork) : IFacilityService
 		var pagedFacilities = facilities.ToPaginateAsQueryable(@params);
 		return await pagedFacilities.ToListAsync();
 	}
+
+    public async ValueTask<IEnumerable<Facility>> GetAllAsync()
+    {
+        return await unitOfWork.FacilityRepository.Select().ToListAsync();
+    }
 }
