@@ -26,7 +26,11 @@ public class UserService(IUnitOfWork unitOfWork) : IUserService
             throw new AlreadyExistException($"This user is already exist with this email and phone | Email={user.Email} & Phone={existUser.Phone}");
         }
 
-		var createdUser = await unitOfWork.UserRepository.InsertAsync(user);
+        var roleWhichIsUser = await unitOfWork.UserRoleRepository.SelectAsync(u => u.Name.ToLower() == "user");
+
+        user.RoleId = roleWhichIsUser.Id;
+        user.Password = PasswordHasher.Hash(user.Password);
+        var createdUser = await unitOfWork.UserRepository.InsertAsync(user);
 		await unitOfWork.SaveAsync();
 		return createdUser;
     }

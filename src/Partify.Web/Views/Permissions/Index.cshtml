@@ -1,9 +1,28 @@
 ﻿@using Partify.Web.Models.Permissions
-@model IEnumerable<PermissionViewModel>
+@using X.PagedList.Mvc.Core;
+@model PermissionPagedListModel
 
 <h2>Permissions</h2>
 
-<a asp-controller="Permissions" asp-action="Create" class="btn btn-primary">Create New</a>
+<div style="display:flex">
+    <div class="col">
+        <a asp-controller="Permissions" asp-action="Create" class="btn btn-primary">Create New</a>
+    </div>
+    <div class="col">
+        <form asp-controller="Permissions" asp-action="Index">
+            <div class="input-group">
+                <div class="form-outline" data-mdb-input-init>
+                    <input type="search" asp-for="Search" id="form1" class="form-control" />
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 <table class="table">
     <thead>
@@ -15,7 +34,7 @@
     </thead>
 
     <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Permissions)
             {
             <tr>
                 <td>@item.Controller</td>
@@ -27,9 +46,21 @@
             </tr>
             }
     </tbody>
-    
-    
 </table>
+
+<div class="mb-7">
+    @Html.PagedListPager(Model.Permissions,
+            page => Url.Action("Index", new
+            {
+                page,
+                Search = Model.Search
+            }),
+            new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })
+</div>
 
 
 <!-- Modal -->

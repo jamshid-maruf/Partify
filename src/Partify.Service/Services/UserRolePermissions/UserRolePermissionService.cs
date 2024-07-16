@@ -74,7 +74,7 @@ public class UserRolePermissionService(IUnitOfWork unitOfWork) : IUserRolePermis
 
     public async ValueTask<IEnumerable<UserRolePermission>> GetAllAsync()
     {
-		return await unitOfWork.UserRolePermissionRepository.Select().ToListAsync();
+		return await unitOfWork.UserRolePermissionRepository.Select(includes: ["Permission", "UserRole"]).ToListAsync();
     }
 
     public async ValueTask<UserRolePermission> GetByIdAsync(long id)

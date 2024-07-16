@@ -25,9 +25,11 @@
                 <tr>
                     <td>@facility.Id</td>
                     <td>@facility.Name</td>
-                    <td><img src="@facility.Icon" alt="Icon" style="max-width: 50px;" /></td>
-                    <td class="d-flex justify-content-start align-items-center">
-                        <a asp-controller="Facilities" asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-info btn-sm btn-rounded me-2" data-mdb-ripple-init>Edit</a>
+                    <td>
+                        <img src="@facility.Icon" alt="Icon" style="max-width: 50px;" />
+                    </td>
+                    <td style="display:flex ; justify-content: end">
+                        <a style="margin-right:3px" asp-controller="Facilities" asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-info btn-sm btn-rounded me-2" data-mdb-ripple-init>Edit</a>
                         <a class="btn btn-danger btn-sm btn-rounded" data-mdb-toggle="modal" data-mdb-target="#showDeletePage" data-id="@facility.Id">Delete</a>
                     </td>
                 </tr>

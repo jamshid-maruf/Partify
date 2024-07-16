@@ -5,6 +5,7 @@ using Partify.Service.Configurations;
 using Partify.Service.Exceptions;
 using Partify.Service.Extensions;
 using Partify.Service.Helpers;
+using X.PagedList;
 
 namespace Partify.Service.Services.Permissions;
 
@@ -73,8 +74,20 @@ public class PermissionService(IUnitOfWork unitOfWork) : IPermissionService
 		return await pagedPemissions.ToListAsync();
 	}
 
-    public async ValueTask<IEnumerable<Permission>> GetAllAsync()
+    public async ValueTask<IPagedList<Permission>> GetAllAsync(int? page, string search = null)
     {
-		return await unitOfWork.PermissionRepository.Select().ToListAsync();
+        var permissions = unitOfWork.PermissionRepository.Select();
+
+        if (!string.IsNullOrWhiteSpace(search))
+            permissions = permissions.Where(p =>
+                p.Action.ToLower().Contains(search.ToLower()) ||
+                p.Controller.ToLower().Contains(search.ToLower()));
+
+        return await permissions.ToPagedListAsync(page ?? 1, 20);
+    }
+    
+	public async ValueTask<IEnumerable<Permission>> GetAllAsync()
+    {
+        return await unitOfWork.PermissionRepository.Select().ToListAsync();
     }
 }

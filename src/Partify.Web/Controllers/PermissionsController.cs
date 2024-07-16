@@ -8,10 +8,10 @@ namespace Partify.Web.Controllers;
 
 public class PermissionsController(IPermissionWebService permissionWebService) : Controller
 {
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? page, string search = null)
     {
-        var permissions = await permissionWebService.GetAllAsync();
-        return View(permissions);
+        var permissions = await permissionWebService.GetAllAsync(page, search);
+        return View(new PermissionPagedListModel { Permissions = permissions });
     }
 
     [HttpGet]
