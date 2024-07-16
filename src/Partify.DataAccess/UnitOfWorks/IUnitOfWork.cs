@@ -23,7 +23,7 @@ public interface IUnitOfWork : IDisposable
 	IRepository<FavoriteAd> FavoriteAdRepository { get; }
 	IRepository<AdCategory> AdCategoryRepository { get; }
 	IRepository<AdCommentFile> AdCommentFileRepository { get; }
-	IRepository<AdPropertyValue> AdPropertyValueRepository { get; }
+	IRepository<AdCategoryPropertyValue> AdCategoryPropertyValueRepository { get; }
 	IRepository<UserRolePermission> UserRolePermissionRepository { get; }
 	IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; }
 

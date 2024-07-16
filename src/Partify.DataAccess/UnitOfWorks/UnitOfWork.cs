@@ -25,7 +25,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 	public IRepository<AdCategory> AdCategoryRepository { get; } = new Repository<AdCategory>(context);
 	public IRepository<Permission> PermissionRepository { get; } = new Repository<Permission>(context);
 	public IRepository<AdCommentFile> AdCommentFileRepository { get; } = new Repository<AdCommentFile>(context);
-	public IRepository<AdPropertyValue> AdPropertyValueRepository { get; } = new Repository<AdPropertyValue>(context);
+	public IRepository<AdCategoryPropertyValue> AdPropertyValueRepository { get; } = new Repository<AdCategoryPropertyValue>(context);
 	public IRepository<UserRolePermission> UserRolePermissionRepository { get; } = new Repository<UserRolePermission>(context);
 	public IRepository<AdCategoryProperty> AdCategoryPropertyRepository { get; } = new Repository<AdCategoryProperty>(context);
 
