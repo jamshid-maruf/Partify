@@ -13,6 +13,7 @@ using Partify.Service.Services.Permissions;
 using Partify.Service.Services.UserRolePermissions;
 using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
+using Partify.Web.WebServices.AdCategories;
 using Partify.Web.WebServices.Permissions;
 using Partify.Web.WebServices.UserRolePermissions;
 using Partify.Web.WebServices.UserRoles;
