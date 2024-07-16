@@ -20,9 +20,9 @@
             <tr>
                 <td>@item.Controller</td>
                 <td>@item.Action</td>
-                <td>
-                    <a class="btn btn-info btn-rounded" asp-controller="Permissions" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a class="btn btn-danger btn-rounded" data-mdb-toggle="modal" data-mdb-target="#showDeletePage" data-id="@item.Id">Delete</a>
+                <td style="display:flex ; justify-content: end">
+                    <a  style="margin-right: 3px" class="btn btn-info btn-rounded" asp-controller="Permissions" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a  class="btn btn-danger btn-rounded" data-mdb-toggle="modal" data-mdb-target="#showDeletePage" data-id="@item.Id">Delete</a>
                 </td>
             </tr>
             }
