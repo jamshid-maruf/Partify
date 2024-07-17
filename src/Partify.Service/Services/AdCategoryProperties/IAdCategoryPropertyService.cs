@@ -14,4 +14,5 @@ public interface IAdCategoryPropertyService
         PaginationParams @params,
         Filter filter,
         string search = null);
+    ValueTask<IEnumerable<AdCategoryProperty>> GetAllAsync();
 }
