@@ -27,9 +27,9 @@
                 <td>@item.UserRole.Name</td>
                 <td>@item.Permission.Controller</td>
                 <td>@item.Permission.Action</td>
-                <td>
-                    <a asp-controller="UserRolePermissions" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-controller="UserRolePermissions" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                <td style="display:flex; justify-content:end">
+                    <a style="margin-right:3px" class="btn btn-info btn-rounded"  asp-controller="UserRolePermissions" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a class="btn btn-danger btn-rounded" asp-controller="UserRolePermissions" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
                 </td>
             </tr>
         }
