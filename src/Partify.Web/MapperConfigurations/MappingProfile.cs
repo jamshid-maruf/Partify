@@ -2,6 +2,7 @@
 using Partify.Domain.Entities.Ads;
 using Partify.Domain.Entities.Facilities;
 using Partify.Domain.Entities.Users;
+using Partify.Web.Models.Accounts;
 using Partify.Web.Models.AdCategories;
 using Partify.Web.Models.AdCategoryPropertyValues;
 using Partify.Web.Models.Facilities;

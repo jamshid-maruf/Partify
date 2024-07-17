@@ -1,4 +1,4 @@
-﻿namespace Partify.Web.Models.Users;
+﻿namespace Partify.Web.Models.Accounts;
 
 public class LoginViewModel
 {
@@ -7,7 +7,4 @@ public class LoginViewModel
     public string LastName { get; set; }
     public long Phone { get; set; }
     public string Email { get; set; }
-    public string Token { get; set; }
-   // public IEnumerable<PermissionViewModel> Permissions { get; set; }
 }
-

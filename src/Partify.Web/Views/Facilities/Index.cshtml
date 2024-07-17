@@ -9,14 +9,13 @@
     <div class="mb-3">
         <a asp-controller="Facilities" asp-action="Create" class="btn btn-success btn-rounded" data-mdb-ripple-init>Create</a>
     </div>
-
     <table class="table table-hover">
         <thead class="table-light">
             <tr>
                 <th>#</th>
                 <th>Name</th>
                 <th>Icon</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +25,7 @@
                     <td>@facility.Id</td>
                     <td>@facility.Name</td>
                     <td>
-                        <img src="@facility.Icon" alt="Icon" style="max-width: 50px;" />
+                        <i class="@facility.Icon" style="font-size: 24px; margin: 5px;"></i>
                     </td>
                     <td style="display:flex ; justify-content: end">
                         <a style="margin-right:3px" asp-controller="Facilities" asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-info btn-sm btn-rounded me-2" data-mdb-ripple-init>Edit</a>

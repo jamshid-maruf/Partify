@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Partify.Service.Exceptions;
 using Partify.Web.Models.Facilities;
 using Partify.Web.WebServices.Facilities;
 
@@ -21,9 +22,18 @@ public class FacilitiesController(IFacilityWebService facilityWebService) : Cont
     [HttpPost]
     public async ValueTask<IActionResult> Create(FacilityCreateModel createModel)
     {
-        var result = await facilityWebService.CreateAsync(createModel);
-        if (result is not null)
-            return RedirectToAction("Index");
+        try
+        {
+            var result = await facilityWebService.CreateAsync(createModel);
+            if (result is not null)
+                return RedirectToAction("Index");
+
+            return View();
+        }
+        catch(AlreadyExistException ex)
+        {
+            ViewBag.Exception = ex.Message;
+        }
 
         return View();
     }

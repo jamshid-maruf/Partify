@@ -1,10 +1,12 @@
-﻿@using Partify.Web.Models.Facilities
+﻿@using Partify.Web.Helpers
+@using Partify.Web.Models.Facilities
 @model FacilityCreateModel
 
 <div class="container mt-5">
     <form asp-controller="Facilities" method="post" asp-action="Create" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="col-md-6">
+                
                 <h1>Facility Create</h1>
 
                 <div class="form-outline mb-4">
@@ -13,14 +15,63 @@
                     <label class="form-label" asp-for="Name">Name</label>
                 </div>
 
-                <div class="form-control-plaintext mb-4">
-                    <span asp-validation-for="Icon" class="text-danger"></span>
-                    <label class="form-label" asp-for="Icon">Icon</label>
-                    <input type="file" asp-for="Icon" class="form-control" />
+                <!-- Icons -->
+                <div class="mb-4">
+                    @foreach (var icon in IconHelper.GetIcons())
+                    {
+                        <i class="@icon icon-option" style="cursor:pointer; font-size: 24px; margin: 5px;"></i>
+                    }
                 </div>
+
+                <!-- Hidden field for selected icon -->
+                <input type="hidden" asp-for="Icon" id="selectedIcon" />
 
                 <button type="submit" class="btn btn-success btn-block">CREATE</button>
             </div>
         </div>
     </form>
 </div>
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+@if (ViewBag.Exception is not null)
+{
+    <script>
+        Toastify({
+            text: "@ViewBag.Exception",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top",
+            position: "right", 
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "#ee6b6e",
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
+    </script>
+}
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.icon-option').forEach(function (icon) {
+            icon.addEventListener('click', function () {
+                // Get the icon class name and remove the "icon-option" class
+                var iconClasses = this.className.split(' ').filter(c => c !== 'icon-option').join(' ');
+
+                // Set the icon class name to the hidden input
+                document.getElementById('selectedIcon').value = iconClasses;
+
+                // Optionally, highlight the selected icon
+                document.querySelectorAll('.icon-option').forEach(function (i) {
+                    i.style.backgroundColor = '';
+                });
+                this.style.backgroundColor = 'lightgray';
+            });
+        });
+    </script>
+}
