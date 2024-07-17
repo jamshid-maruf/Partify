@@ -4,7 +4,7 @@ using Partify.Domain.Entities.Ads;
 
 namespace Partify.DataAccess.EntityConfigurations;
 
-public class AdPropertyValueEntityTypeConfiguration : IEntityTypeConfiguration<AdCategoryPropertyValue>
+public class AdCategoryPropertyValueTypeConfiguration : IEntityTypeConfiguration<AdCategoryPropertyValue>
 {
 	public void Configure(EntityTypeBuilder<AdCategoryPropertyValue> builder)
 	{

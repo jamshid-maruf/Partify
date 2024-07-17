@@ -1,11 +1,13 @@
 ﻿using Partify.DataAccess.UnitOfWorks;
 using Partify.Service.Services.AdCategories;
+using Partify.Service.Services.AdCategoryPropertyValues;
 using Partify.Service.Services.Facilities;
 using Partify.Service.Services.Permissions;
 using Partify.Service.Services.UserRolePermissions;
 using Partify.Service.Services.UserRoles;
 using Partify.Service.Services.Users;
 using Partify.Web.WebServices.AdCategories;
+using Partify.Web.WebServices.AdCategoryPropertyValues;
 using Partify.Web.WebServices.Facilities;
 using Partify.Web.WebServices.Permissions;
 using Partify.Web.WebServices.UserRolePermissions;
@@ -25,6 +27,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<IUserRolePermissionService, UserRolePermissionService>();
         services.AddScoped<IPermissionService, PermissionService>();
         services.AddScoped<IFacilityService, FacilityService>();
+        services.AddScoped<IAdCategoryPropertyValueService, AdCategoryPropertyValueService>();
     }
 
     public static void AddWebServices(this IServiceCollection services)

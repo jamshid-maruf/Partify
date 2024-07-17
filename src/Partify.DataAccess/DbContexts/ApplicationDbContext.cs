@@ -26,7 +26,7 @@ public class ApplicationDbContext : DbContext
 	public DbSet<AdFacility> AdFacilities { get; set; }
 	public DbSet<AdCategory> AdCategories { get; set; }
 	public DbSet<AdCommentFile> AdCommentFiles { get; set; }
-	public DbSet<AdCategoryPropertyValue> AdPropertyValues { get; set; }
+	public DbSet<AdCategoryPropertyValue> AdCategoryPropertyValues { get; set; }
 	public DbSet<UserRolePermission> UserRolePermissions { get; set; }
 	public DbSet<AdCategoryProperty> AdCategoryProperties { get; set; }
 
@@ -47,7 +47,7 @@ public class ApplicationDbContext : DbContext
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdFacilityEntityTypeConfiguration).Assembly);
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(FavoriteAdEntityTypeConfiguration).Assembly);
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdCommentFileEntityTypeConfiguration).Assembly);
-		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdPropertyValueEntityTypeConfiguration).Assembly);
+		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdCategoryPropertyValueTypeConfiguration).Assembly);
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserRolePermissionEntityTypeConfiguration).Assembly);
 		modelBuilder.ApplyConfigurationsFromAssembly(typeof(AdCategoryPropertyEntityTypeConfiguration).Assembly);
 
