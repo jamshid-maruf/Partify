@@ -94,4 +94,9 @@ public class AdCategoryPropertyService(IUnitOfWork unitOfWork) : IAdCategoryProp
         await unitOfWork.SaveAsync();
         return updatedAdCategoryProperty;
     }
+
+    public async ValueTask<IEnumerable<AdCategoryProperty>> GetAllAsync()
+    {
+        return await unitOfWork.AdCategoryPropertyRepository.Select(includes: ["AdCategory"]).ToListAsync();
+    }
 }
