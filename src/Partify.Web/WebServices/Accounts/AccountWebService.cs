@@ -8,14 +8,15 @@ public class AccountWebService(IAccountService accountService, IMapper mapper) :
 {
     public async ValueTask<LoginViewModel> LoginAsync(LoginModel model)
     {
-        var result = await accountService.LoginAsync(model.Phone, model.Password);
+        var result = await accountService.WebLoginAsync(model.Phone, model.Password);
         return new LoginViewModel
         {
-            Id = result.user.Id,
-            Email = result.user.Email,
-            Phone = result.user.Phone,
-            LastName = result.user.LastName,
-            FirstName = result.user.FirstName
+            Id = result.Id,
+            Email = result.Email,
+            Phone = result.Phone,
+            LastName = result.LastName,
+            FirstName = result.FirstName,
+            Role = result.Role.Name,
         };
     }
 

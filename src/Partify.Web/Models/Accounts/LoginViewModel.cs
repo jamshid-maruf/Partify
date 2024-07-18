@@ -7,4 +7,5 @@ public class LoginViewModel
     public string LastName { get; set; }
     public long Phone { get; set; }
     public string Email { get; set; }
+    public string Role { get; set; }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Web.Models.UserRoles;
 using Partify.Web.Models.Users;
 using Partify.Web.WebServices.UserRoles;
@@ -6,6 +7,7 @@ using Partify.Web.WebServices.Users;
 
 namespace Partify.Web.Controllers;
 
+[Authorize]
 public class UsersController(IUserWebService userWebService, IUserRoleWebService userRoleWebService) : Controller
 {
 	public async ValueTask<IActionResult> Index()

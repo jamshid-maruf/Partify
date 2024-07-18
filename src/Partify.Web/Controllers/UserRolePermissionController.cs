@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Web.Models;
 using Partify.Web.Models.UserRolePermissions;
 using Partify.Web.WebServices.Permissions;
@@ -7,6 +8,7 @@ using Partify.Web.WebServices.UserRoles;
 
 namespace Partify.Web.Controllers;
 
+[Authorize]
 public class UserRolePermissionsController(
     IUserRolePermissionWebService userRolePermissionWebService,
     IUserRoleWebService userRoleWebService, IPermissionWebService permissionWebService) : Controller

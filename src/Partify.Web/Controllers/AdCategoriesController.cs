@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Web.Models.AdCategories;
 using Partify.Web.WebServices.AdCategories;
 
 namespace Partify.Web.Controllers;
 
+[Authorize]
 public class AdCategoriesController(IAdCategoryWebService adCategoryWebService) : Controller
 {
     public async ValueTask<IActionResult> Index()

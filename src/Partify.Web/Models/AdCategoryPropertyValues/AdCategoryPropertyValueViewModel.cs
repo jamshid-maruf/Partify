@@ -1,4 +1,4 @@
-﻿using Partify.WebApi.Models.AdCategoryProperties;
+﻿using Partify.Web.Models.AdCategories;
 
 namespace Partify.Web.Models.AdCategoryPropertyValues;
 

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Service.Exceptions;
 using Partify.Web.Models.Accounts;
 using Partify.Web.WebServices.Accounts;
+using System.Security.Claims;
 
 namespace Partify.Web.Controllers;
 
@@ -15,6 +18,7 @@ public class AccountsController(IAccountWebService accountWebService) : Controll
         return View();
     }
 
+    [HttpPost]
     public async ValueTask<IActionResult> Login(LoginModel model)
     {
         try
@@ -22,7 +26,20 @@ public class AccountsController(IAccountWebService accountWebService) : Controll
             var result = await accountWebService.LoginAsync(model);
             if(result is not null)
             {
+                var claims = new List<Claim>
+                {
+                   new Claim("Id", result.Id.ToString()),
+                   new Claim("Fullname", $"{result.FirstName} {result.LastName}"),
+                   new Claim(ClaimTypes.Role, result.Role)
+                };
 
+                var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme, 
+                    new ClaimsPrincipal(claimIdentity));
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
@@ -35,8 +52,9 @@ public class AccountsController(IAccountWebService accountWebService) : Controll
         return View();
     }
 
-    public IActionResult Logout()
+    public async ValueTask<IActionResult> Logout()
     {
-        return View();
+        await HttpContext.SignOutAsync();
+        return RedirectToAction("Login");
     }
 }

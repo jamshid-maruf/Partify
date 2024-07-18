@@ -94,6 +94,18 @@ public class AccountService(IUnitOfWork unitOfWork, IMemoryCache memoryCache) : 
 		}
 	}
 
+	public async ValueTask<User> WebLoginAsync(long phone, string password)
+	{
+        var existUser = await unitOfWork.UserRepository
+                .SelectAsync(expression: user => user.Phone == phone, includes: ["Role"])
+            ?? throw new ForbiddenException("Phone or Password is invalid");
+
+        if (!PasswordHasher.Verify(password, existUser?.Password ?? ""))
+            throw new ForbiddenException("Phone or Password is invalid");
+
+		return existUser;
+    }
+
 	public async ValueTask<bool> SendCodeAsync(string email)
 	{
 		var existUser = await unitOfWork.UserRepository.SelectAsync(user => user.Email == email)

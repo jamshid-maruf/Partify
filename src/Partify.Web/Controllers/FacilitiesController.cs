@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Service.Exceptions;
 using Partify.Web.Models.Facilities;
 using Partify.Web.WebServices.Facilities;
 
 namespace Partify.Web.Controllers;
 
+[Authorize]
 public class FacilitiesController(IFacilityWebService facilityWebService) : Controller
 {
     public async ValueTask<IActionResult> Index()

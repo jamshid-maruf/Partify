@@ -10,7 +10,6 @@ using Partify.Web.Models.Permissions;
 using Partify.Web.Models.UserRolePermissions;
 using Partify.Web.Models.UserRoles;
 using Partify.Web.Models.Users;
-using Partify.WebApi.Models.AdCategoryProperties;
 
 
 namespace Partify.Web.MapperConfigurations;

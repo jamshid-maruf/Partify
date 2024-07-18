@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Partify.Web.Models.Permissions;
 using Partify.Web.WebServices.Permissions;
 using Partify.Web.WebServices.Users;
-using Partify.WebApi.Models.Ads;
 
 namespace Partify.Web.Controllers;
 
+[Authorize]
 public class PermissionsController(IPermissionWebService permissionWebService) : Controller
 {
     public async Task<IActionResult> Index(int? page, string search = null)
