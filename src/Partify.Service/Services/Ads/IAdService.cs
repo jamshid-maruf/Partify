@@ -1,5 +1,7 @@
 ﻿using Partify.Domain.Entities.Ads;
+using Partify.Domain.Entities.Users;
 using Partify.Service.Configurations;
+using X.PagedList;
 
 namespace Partify.Service.Services.Ads;
 
@@ -14,4 +16,5 @@ public interface IAdService
         Filter filter,
         string search = null,
         long? categoryId = null);
+    ValueTask<IPagedList<Ad>> GetAllAsync(int? page, string search = null, long? categoryId = null);
 }

@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Partify.DataAccess.UnitOfWorks;
 using Partify.Domain.Entities.Ads;
+using Partify.Domain.Entities.Users;
 using Partify.Service.Configurations;
 using Partify.Service.Exceptions;
 using Partify.Service.Extensions;
 using Partify.Service.Services.AdViews;
+using X.PagedList;
 
 namespace Partify.Service.Services.Ads;
 
@@ -60,7 +62,8 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
 
     public async ValueTask<Ad> GetByIdAsync(long id)
     {
-        var existAd = await unitOfWork.AdRepository.SelectAsync(ad => ad.Id == id)
+        var existAd = await unitOfWork.AdRepository
+            .SelectAsync(ad => ad.Id == id, includes: ["Scores", "Facilities", "Comments", "Images", "Properties", "AdCategory", "Merchant"])
             ?? throw new NotFoundException($"Ad is not found with this ID={id}");
 
         await adViewService.IncrementViewCountAsync(existAd.Id);
@@ -70,7 +73,9 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
 
     public async ValueTask<IEnumerable<Ad>> GetAllAsync(PaginationParams @params, Filter filter, string search = null, long? categoryId = null)
     {
-        var ads = unitOfWork.AdRepository.Select().OrderBy(filter);
+        var ads = unitOfWork.AdRepository
+            .Select(includes: ["Scores", "Facilities", "Comments", "Images", "Properties", "AdCategory", "Merchant"])
+            .OrderBy(filter);
 
         if (categoryId.HasValue)
             ads = ads.Where(ad => ad.AdCategoryId == categoryId);
@@ -83,5 +88,21 @@ public class AdService(IUnitOfWork unitOfWork, IAdViewService adViewService) : I
 
         var pagedAds = ads.ToPaginateAsQueryable(@params);
         return await pagedAds.ToListAsync();
+    }
+
+    public async ValueTask<IPagedList<Ad>> GetAllAsync(int? page, string search = null, long? categoryId = null)
+    {
+        var ads = unitOfWork.AdRepository
+            .Select(includes: ["Scores", "Facilities", "Comments", "Images", "Properties", "AdCategory", "Merchant"]);
+
+        if (categoryId.HasValue)
+            ads = ads.Where(ad => ad.AdCategoryId == categoryId);
+
+        if (!string.IsNullOrWhiteSpace(search))
+            ads = ads.Where(p =>
+                p.Phone.ToString().ToLower().Contains(search.ToLower()) ||
+                p.Description.ToLower().Contains(search.ToLower()));
+
+        return await ads.ToPagedListAsync(page ?? 1, 20);
     }
 }
